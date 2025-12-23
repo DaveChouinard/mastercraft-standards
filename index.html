@@ -1,0 +1,3129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mastercraft Electric - Installation Standards Library</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: #f5f5f5;
+      padding: 20px;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    
+    .header {
+      background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+      color: white;
+      padding: 20px 30px;
+      border-radius: 8px 8px 0 0;
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      border-bottom: 4px solid #FFD700;
+    }
+    
+    .header-logo {
+      height: 80px;
+      width: auto;
+      flex-shrink: 0;
+    }
+    
+    .header-content {
+      flex: 1;
+    }
+    
+    .header h1 {
+      font-size: 28px;
+      margin-bottom: 8px;
+      color: #FFD700;
+    }
+    
+    .header p {
+      font-size: 16px;
+      opacity: 0.9;
+      color: white;
+    }
+    
+    @media (max-width: 768px) {
+      .header {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+        gap: 15px;
+      }
+      
+      .header-logo {
+        height: 60px;
+      }
+      
+      .header h1 {
+        font-size: 22px;
+      }
+      
+      .header p {
+        font-size: 14px;
+      }
+    }
+    
+    .content {
+      padding: 30px;
+    }
+    
+    .intro {
+      background: #fffbeb;
+      border-left: 4px solid #FFD700;
+      padding: 20px;
+      margin-bottom: 30px;
+      border-radius: 4px;
+    }
+    
+    .intro h2 {
+      color: #1a1a1a;
+      margin-bottom: 10px;
+    }
+    
+    .category {
+      margin-bottom: 20px;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    
+    .category-header {
+      background: #f9fafb;
+      padding: 18px 24px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.2s;
+    }
+    
+    .category-header:hover {
+      background: #f3f4f6;
+    }
+    
+    .category-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: #1f2937;
+    }
+    
+    .toggle-icon {
+      font-size: 18px;
+      transition: transform 0.3s;
+    }
+    
+    .category-content {
+      padding: 24px;
+      display: none;
+    }
+    
+    .category-content.active {
+      display: block;
+    }
+    
+    .standard {
+      margin-bottom: 32px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    
+    .standard:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    
+    .standard-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 16px;
+      padding-left: 12px;
+      border-left: 3px solid #FFD700;
+    }
+    
+    .standard-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 16px;
+    }
+    
+    @media (max-width: 768px) {
+      .standard-content {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .column {
+      padding: 16px;
+      border-radius: 6px;
+    }
+    
+    .correct {
+      background: #f0fdf4;
+      border: 2px solid #86efac;
+    }
+    
+    .incorrect {
+      background: #fef2f2;
+      border: 2px solid #fca5a5;
+    }
+    
+    .column h4 {
+      margin-bottom: 12px;
+      font-size: 16px;
+    }
+    
+    .correct h4 {
+      color: #166534;
+    }
+    
+    .incorrect h4 {
+      color: #991b1b;
+    }
+    
+    .column ul {
+      margin-left: 20px;
+    }
+    
+    .column li {
+      margin-bottom: 8px;
+    }
+    
+    .column strong {
+      color: #1f2937;
+    }
+    
+    .note {
+      margin-top: 12px;
+      padding: 12px;
+      background: white;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    
+    .code-ref {
+      background: #f9fafb;
+      padding: 12px;
+      border-radius: 4px;
+      font-size: 14px;
+      color: #6b7280;
+    }
+    
+    .footer {
+      background: #f9fafb;
+      padding: 20px 30px;
+      border-top: 1px solid #e5e7eb;
+      text-align: center;
+      color: #6b7280;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <img src="/mastercraft-standards/logo.jpg" alt="Mastercraft Electric Logo" class="header-logo">
+      <div class="header-content">
+        <h1>⚡ Installation Standards Library</h1>
+        <p>Visual reference guide for construction teams | Western Washington</p>
+      </div>
+    </div>
+    
+    <div class="content">
+      <div class="intro">
+        <h2>How to Use This Guide</h2>
+        <p><strong>Mobile Access:</strong> This guide is optimized for phones and tablets. Foremen and journeymen can reference standards right at the job site.</p>
+        <p><strong>Format:</strong> Each standard shows side-by-side examples of CORRECT vs INCORRECT installations with explanations of why it matters.</p>
+        <p><strong>Purpose:</strong> Ensure consistency across all Mastercraft Electric projects and reduce rework by clarifying "the Mastercraft way."</p>
+      </div>
+
+      <!-- JOB STARTUP & PROJECT MANAGEMENT -->
+      <div class="category">
+        <div class="category-header" onclick="toggleCategory('startup')">
+          <span class="category-title">Job Startup & Project Management</span>
+          <span class="toggle-icon">▼</span>
+        </div>
+        <div id="startup" class="category-content">
+          
+          <div class="standard">
+            <div class="standard-title">1. Pre-Construction Meeting & Document Review</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Project Startup</h4>
+                <ul>
+                  <li><strong>Attend pre-construction meeting with PM</strong> - Before any work begins on site</li>
+                  <li><strong>Review complete contract scope of work</strong> - Understand what is/isn't included</li>
+                  <li><strong>Review all project drawings thoroughly</strong> - Electrical, architectural, structural, mechanical when applicable</li>
+                  <li><strong>Understand schedule milestones and deadlines</strong> - Key dates for rough-in, trim, substantial completion</li>
+                  <li><strong>Review site logistics and requirements</strong> - Work hours, security, badging, parking</li>
+                  <li><strong>Obtain and organize all project documents</strong> - Latest drawings, specs, submittals, safety plans, schedules</li>
+                  <li><strong>Keep documents organized in field binder and Procore</strong> - Easy access for crew</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Proper project startup prevents misunderstandings about scope, schedule, and site requirements. Clear documentation prevents costly mistakes.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Poor Startup</h4>
+                <ul>
+                  <li>Starting work without attending pre-con meeting</li>
+                  <li>Not reviewing full scope (missing work items)</li>
+                  <li>Working from old drawing revisions</li>
+                  <li>Unaware of schedule milestones</li>
+                  <li>Missing site access or security requirements</li>
+                  <li>Disorganized or missing project documents</li>
+                  <li>No system for document management</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> Company project startup procedures, Contract documents, Project specifications
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">2. Reading & Interpreting Electrical Drawings</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Understanding Project Drawings</h4>
+                <ul>
+                  <li><strong>Review complete drawing set before starting</strong> - Electrical, architectural, mechanical, structural, fire protection</li>
+                  <li><strong>Understand drawing symbols and abbreviations</strong> - Legend is typically on first sheet, refer to it often</li>
+                  <li><strong>Read title block for drawing information</strong> - Project name, date, revision number, engineer/architect</li>
+                  <li><strong>Check drawing revision numbers</strong> - Ensure you're working from latest revision, note changes</li>
+                  <li><strong>Study one-line diagrams carefully</strong> - Understand system layout, voltage levels, protection coordination</li>
+                  <li><strong>Review panel schedules and equipment lists</strong> - Verify circuit counts, breaker sizes, equipment specifications</li>
+                  <li><strong>Coordinate between trade drawings</strong> - Compare electrical routing with mechanical, plumbing, fire sprinkler</li>
+                  <li><strong>Identify potential conflicts early</strong> - Where conduits/equipment might conflict with other trades</li>
+                  <li><strong>Note areas requiring clarification</strong> - Mark up drawings with questions, submit RFIs promptly</li>
+                  <li><strong>Understand scale and dimensions</strong> - Use architect's scale, verify critical dimensions</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Proper drawing interpretation prevents installation errors, identifies conflicts before they become problems, and ensures work matches design intent.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Poor Drawing Review</h4>
+                <ul>
+                  <li>Working without reviewing full drawing set</li>
+                  <li>Not understanding symbols (guessing)</li>
+                  <li>Working from outdated drawing revisions</li>
+                  <li>Ignoring one-line diagrams</li>
+                  <li>Not coordinating with other trade drawings</li>
+                  <li>Missing conflicts until installation</li>
+                  <li>Not submitting RFIs for unclear items</li>
+                  <li>Incorrect scale interpretation</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> Project drawings and specifications, Drawing standards (IEEE, NFPA), RFI procedures
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">3. Photo Documentation Standards</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Documentation Photography</h4>
+                <ul>
+                  <li><strong>Take photos BEFORE starting work</strong> - Document existing conditions, especially for remodel work</li>
+                  <li><strong>Photograph work in progress at key stages</strong> - Underground conduit before backfill, rough-in before drywall</li>
+                  <li><strong>Capture all work that will be concealed</strong> - Above ceiling, underground, in walls, behind equipment</li>
+                  <li><strong>Document panel wire dressing before closing</strong> - Shows quality work, useful if questions arise later</li>
+                  <li><strong>Photograph all terminations and connections</strong> - Transformer connections, service equipment, critical circuits</li>
+                  <li><strong>Take photos of completed installations</strong> - Final product, especially for change orders or warranty reference</li>
+                  <li><strong>Document any damage or pre-existing conditions</strong> - Protects company from false claims</li>
+                  <li><strong>Include reference points in photos</strong> - Tape measure, nearby landmarks for location identification</li>
+                  <li><strong>Organize photos by date and location</strong> - Use consistent naming: "Project-Area-Date-Description"</li>
+                  <li><strong>Upload photos to project management system promptly</strong> - Procore, shared drive, or company system</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Photos are legal protection, quality documentation, and valuable reference for future work. Critical for warranty claims and dispute resolution.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Poor Documentation</h4>
+                <ul>
+                  <li>No photos of existing conditions</li>
+                  <li>Missing photos of concealed work</li>
+                  <li>Not documenting pre-existing damage</li>
+                  <li>Photos without context or reference points</li>
+                  <li>Poor photo organization (can't find when needed)</li>
+                  <li>Photos stored only on personal phone</li>
+                  <li>Waiting until end of project to upload photos</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> Company documentation procedures, Contract requirements, Legal protection best practices
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">4. Site Visit & Coordination with GC</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Initial Site Assessment</h4>
+                <ul>
+                  <li><strong>Conduct thorough site walkthrough</strong> - Before mobilizing crew and materials</li>
+                  <li><strong>Meet with GC superintendent</strong> - Establish working relationship, understand their expectations</li>
+                  <li><strong>Identify and secure laydown areas</strong> - Adequate space for materials and staging</li>
+                  <li><strong>Confirm storage space availability</strong> - Secure location for tools and materials</li>
+                  <li><strong>Verify parking arrangements</strong> - Where crew can park, any permits needed</li>
+                  <li><strong>Assess temporary power needs</strong> - What's available, what needs to be installed</li>
+                  <li><strong>Identify site hazards and restrictions</strong> - Overhead power, trenches, confined spaces, etc.</li>
+                  <li><strong>Understand site access and security</strong> - Badge requirements, gate codes, check-in procedures</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Site assessment prevents logistics problems, identifies hazards early, and establishes good relationship with GC. Knowing site conditions prevents surprises.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Poor Site Assessment</h4>
+                <ul>
+                  <li>No site walkthrough before starting</li>
+                  <li>Not meeting with GC superintendent</li>
+                  <li>No plan for material storage (cluttered site)</li>
+                  <li>Parking issues causing delays</li>
+                  <li>Missing temporary power connections</li>
+                  <li>Unaware of site hazards</li>
+                  <li>Access/security problems on first day</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> OSHA site safety requirements, GC site-specific rules, Company coordination procedures
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">5. Safety Planning & Crew Orientation</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Safety-First Approach</h4>
+                <ul>
+                  <li><strong>Review site-specific safety plan thoroughly</strong> - Understand all requirements before work</li>
+                  <li><strong>Identify all site hazards</strong> - Overhead power, excavations, confined spaces, fall hazards, etc.</li>
+                  <li><strong>Develop Job Hazard Analysis (JHA) or AHA</strong> - Document specific hazards and mitigation for this project</li>
+                  <li><strong>Plan for required PPE</strong> - Hard hats, safety glasses, gloves, arc flash gear, etc.</li>
+                  <li><strong>Establish LOTO procedures</strong> - Before any energized work or equipment maintenance</li>
+                  <li><strong>Plan for confined space entry if applicable</strong> - Permits, ventilation, attendants, rescue plan</li>
+                  <li><strong>Arrange hot work permits</strong> - Welding, cutting, or other spark-producing work</li>
+                  <li><strong>Conduct safety orientation for crew BEFORE work begins</strong> - Everyone understands hazards and procedures</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Safety is always the first priority. Proper planning prevents injuries, keeps crew safe, and shows professionalism to GC and client.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Inadequate Safety Planning</h4>
+                <ul>
+                  <li>No safety plan review before starting</li>
+                  <li>Hazards not identified or communicated</li>
+                  <li>Missing or inadequate PPE</li>
+                  <li>No LOTO procedures established</li>
+                  <li>Starting work without crew safety orientation</li>
+                  <li>Hot work without permits</li>
+                  <li>Confined space entry without proper procedures</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> OSHA 1926 (Construction safety), Company safety policies, Site-specific safety plans, JHA/AHA requirements
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">6. Material & Tool Planning</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Resource Planning</h4>
+                <ul>
+                  <li><strong>Review material lists and commodity POs</strong> - Understand what's been ordered and what's needed</li>
+                  <li><strong>Plan initial material order for startup phase</strong> - Rough-in materials, temporary power, etc.</li>
+                  <li><strong>Verify lead times for long-lead items</strong> - Switchgear, panels, transformers, specialty fixtures</li>
+                  <li><strong>Coordinate deliveries to avoid site congestion</strong> - Schedule with GC, don't block other trades</li>
+                  <li><strong>Check material storage and protection requirements</strong> - Weather protection, security, organization</li>
+                  <li><strong>Determine tools/equipment needed</strong> - Lifts, benders, threading machines, specialty tools</li>
+                  <li><strong>Inspect all tools for safety</strong> - Check cords, guards, proper operation before use</li>
+                  <li><strong>Schedule equipment rentals if required</strong> - Boom lifts, scissor lifts, trenchers, etc.</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Material and tool planning prevents delays from missing materials or equipment. Proper planning keeps crew productive from day one.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Poor Planning</h4>
+                <ul>
+                  <li>No material review before starting</li>
+                  <li>Missing critical materials (crew idle)</li>
+                  <li>Unaware of long-lead item delays</li>
+                  <li>Uncoordinated deliveries blocking site</li>
+                  <li>Materials damaged from poor storage</li>
+                  <li>Missing necessary tools/equipment</li>
+                  <li>Using damaged or unsafe tools</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> Project material lists, Purchase orders, Tool inspection requirements, Equipment rental procedures
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">7. Layout & Pre-Installation Coordination</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Planning the Work</h4>
+                <ul>
+                  <li><strong>Identify key layout points early</strong> - Slab sleeves, wall penetrations, equipment pads, embeds</li>
+                  <li><strong>Mark up drawings for field use if needed</strong> - Clarify routing, add details, note conflicts</li>
+                  <li><strong>Plan the sequence of installation</strong> - Underground first, rough-in, trim - logical progression</li>
+                  <li><strong>Coordinate with other trades to avoid conflicts</strong> - Mechanical, plumbing, fire sprinkler routes</li>
+                  <li><strong>Verify ceiling heights and finished elevations</strong> - Affects box heights, fixture mounting, clearances</li>
+                  <li><strong>Identify potential access issues</strong> - Plan work before drywall closes in access</li>
+                  <li><strong>Plan for phasing if required</strong> - Occupied buildings, tenant improvements, staged work</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Planning prevents rework from conflicts with other trades. Proper sequencing keeps crew working efficiently without wasted effort.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - No Planning</h4>
+                <ul>
+                  <li>Starting without layout verification</li>
+                  <li>Missing critical penetrations or embeds</li>
+                  <li>No installation sequence plan</li>
+                  <li>Conflicts with other trades (rework)</li>
+                  <li>Wrong elevations or heights</li>
+                  <li>Working out of sequence (inefficient)</li>
+                  <li>Access issues discovered too late</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> Project drawings and specifications, Coordination drawings, GC construction schedule
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">8. As-Built Documentation & Daily Reporting</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Documentation Standards</h4>
+                <ul>
+                  <li><strong>Set up as-built drawings from Day 1</strong> - Don't wait until the end of project</li>
+                  <li><strong>Update as-builts daily or as work progresses</strong> - Mark changes immediately while fresh in mind</li>
+                  <li><strong>Capture all field modifications and changes</strong> - Rerouted conduits, moved boxes, added circuits</li>
+                  <li><strong>Use consistent markup symbols and colors</strong> - Make as-builts clear and easy to read</li>
+                  <li><strong>Complete daily reports every day</strong> - Crew counts, work performed, delays, material deliveries</li>
+                  <li><strong>Document issues and delays immediately</strong> - RFIs, change orders, problems as they occur</li>
+                  <li><strong>Communicate daily progress to PM</strong> - Keep office informed, flag problems early</li>
+                  <li><strong>Take photos of work in progress</strong> - Especially before covering up (underground, above ceiling)</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Good documentation protects company from disputes, provides accurate record for client, and makes future service work easier. Daily reporting catches problems early.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Poor Documentation</h4>
+                <ul>
+                  <li>No as-built documentation during project</li>
+                  <li>Trying to recreate as-builts at end (inaccurate)</li>
+                  <li>Missing field changes and modifications</li>
+                  <li>Inconsistent or unclear markups</li>
+                  <li>Incomplete or missing daily reports</li>
+                  <li>Not communicating issues to PM</li>
+                  <li>No photo documentation of covered work</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> Contract as-built requirements, Company documentation procedures, Daily report forms
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">9. Crew Communication & Expectations</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Setting Crew Up for Success</h4>
+                <ul>
+                  <li><strong>Meet with crew before work begins</strong> - Start-of-project kickoff meeting</li>
+                  <li><strong>Discuss complete scope of work</strong> - What we're installing, sequence, special requirements</li>
+                  <li><strong>Review all safety hazards and site rules</strong> - PPE, LOTO, site-specific restrictions</li>
+                  <li><strong>Communicate schedule expectations clearly</strong> - Milestones, deadlines, daily productivity goals</li>
+                  <li><strong>Explain quality requirements</strong> - Mastercraft standards, customer expectations, inspection criteria</li>
+                  <li><strong>Assign clear responsibilities</strong> - Who's responsible for what tasks</li>
+                  <li><strong>Encourage questions and feedback</strong> - Open communication, address concerns</li>
+                  <li><strong>Conduct daily toolbox talks</strong> - Brief meetings to discuss day's work, safety topics</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Clear communication sets expectations, prevents misunderstandings, and gets everyone working toward same goals. Crew performs better when they understand the big picture.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Poor Communication</h4>
+                <ul>
+                  <li>No crew kickoff meeting</li>
+                  <li>Unclear scope or responsibilities</li>
+                  <li>Safety hazards not communicated</li>
+                  <li>Unrealistic or unclear schedule expectations</li>
+                  <li>Quality standards not explained</li>
+                  <li>No daily coordination or planning</li>
+                  <li>Crew doesn't feel comfortable asking questions</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> Company management procedures, OSHA toolbox talk requirements, Leadership best practices
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">10. Electrical Shutdown Pre-Planning</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Shutdown Planning Requirements</h4>
+                <ul>
+                  <li><strong>Define exact scope of shutdown work</strong> - Landing feeders, breaker installation, gear modification, etc.</li>
+                  <li><strong>Determine all affected systems and equipment</strong> - Identify everything that will be de-energized</li>
+                  <li><strong>Notify stakeholders at least 2 weeks in advance</strong> - Facility management, GC, utility provider (if applicable)</li>
+                  <li><strong>Provide written shutdown notice</strong> - Document date, time, duration, affected areas</li>
+                  <li><strong>Confirm acceptable shutdown window</strong> - Work with facility to minimize operational impact</li>
+                  <li><strong>Conduct internal shutdown prep meeting</strong> - Foreman, PM, and crew review scope and safety</li>
+                  <li><strong>Review sequence of operations</strong> - Step-by-step plan for shutdown and re-energization</li>
+                  <li><strong>Verify all equipment and materials onsite</strong> - Tools, PPE, terminations, breakers, conductors, labels, testing equipment</li>
+                  <li><strong>Confirm availability of LOTO devices</strong> - Locks, tags, lockout devices for all isolation points</li>
+                  <li><strong>Verify arc flash PPE available</strong> - Appropriate for incident energy level</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Thorough planning prevents delays, surprises, and safety issues. Two weeks notice allows facility to plan around shutdown. Having all materials ready prevents extended downtime.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Poor Planning</h4>
+                <ul>
+                  <li>Starting shutdown without clear scope definition</li>
+                  <li>Last-minute notification to facility (causes problems)</li>
+                  <li>No written shutdown notice or documentation</li>
+                  <li>Not coordinating acceptable time window</li>
+                  <li>Missing materials or equipment on shutdown day</li>
+                  <li>No LOTO devices or plan prepared</li>
+                  <li>Inadequate or missing arc flash PPE</li>
+                  <li>No internal team coordination meeting</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> NFPA 70E (Electrical safety), OSHA 1910.147 (LOTO), Company shutdown procedures
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">11. Shutdown LOTO Preparation</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - LOTO Planning</h4>
+                <ul>
+                  <li><strong>Review and prepare written LOTO plan in advance</strong> - Don't wait until shutdown day</li>
+                  <li><strong>Determine all isolation points</strong> - Identify every disconnect, breaker, or switch to lock out</li>
+                  <li><strong>Verify isolation points against drawings</strong> - Use one-line diagrams and electrical drawings</li>
+                  <li><strong>Identify energy sources</strong> - Not just electrical - look for stored energy, capacitors, batteries</li>
+                  <li><strong>Establish sequence for lockout</strong> - What gets locked out in what order</li>
+                  <li><strong>Assign LOTO responsibilities</strong> - Who applies locks, who verifies, authorized employees only</li>
+                  <li><strong>Prepare lockout tags with proper information</strong> - Name, date, reason, contact info</li>
+                  <li><strong>Plan for zero energy verification</strong> - How absence of voltage will be tested at each point</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> LOTO planning is life safety. Missing an energy source or lockout point can result in serious injury or death. Written plan ensures nothing is missed.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Inadequate LOTO</h4>
+                <ul>
+                  <li>No written LOTO plan</li>
+                  <li>Incomplete identification of isolation points</li>
+                  <li>Not verifying against drawings (missing sources)</li>
+                  <li>No consideration of stored energy</li>
+                  <li>Unclear LOTO responsibilities</li>
+                  <li>Missing or incomplete lockout tags</li>
+                  <li>No plan for zero energy verification</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> OSHA 1910.147 (LOTO standard), NFPA 70E (Lockout/tagout procedures), Company LOTO procedures
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">12. Shutdown Day Execution</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Shutdown Procedures</h4>
+                <ul>
+                  <li><strong>Conduct pre-work safety briefing (toolbox talk)</strong> - Specific to this shutdown, review all hazards</li>
+                  <li><strong>Review LOTO steps with entire crew</strong> - Everyone understands the plan</li>
+                  <li><strong>Confirm emergency contacts and chain of command</strong> - Who to call if problems occur</li>
+                  <li><strong>Reconfirm with facility contact before starting</strong> - Final verification they're ready</li>
+                  <li><strong>Notify utility or GC if applicable</strong> - Keep all stakeholders informed</li>
+                  <li><strong>Follow written shutdown procedure step-by-step</strong> - Don't deviate from plan</li>
+                  <li><strong>De-energize equipment in proper sequence</strong> - Downstream to upstream typically</li>
+                  <li><strong>Apply LOTO devices at all isolation points</strong> - Each authorized person applies their own lock</li>
+                  <li><strong>VERIFY absence of voltage before starting work</strong> - Test with calibrated voltage detector at all points</li>
+                  <li><strong>Treat all circuits as energized until proven otherwise</strong> - Never assume it's dead</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Following proper shutdown procedure prevents accidents. Voltage verification is critical - never trust that something is de-energized without testing.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Dangerous Practices</h4>
+                <ul>
+                  <li>No pre-work safety briefing</li>
+                  <li>Starting without facility confirmation</li>
+                  <li>Deviating from written procedure</li>
+                  <li>Improper shutdown sequence</li>
+                  <li>Missing LOTO devices or incomplete lockout</li>
+                  <li>NOT verifying absence of voltage (DEADLY)</li>
+                  <li>Assuming circuits are dead without testing</li>
+                  <li>Starting work before LOTO is complete</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> NFPA 70E 120.1 (Approach boundaries), OSHA 1910.333 (Electrical work practices), OSHA 1910.147 (LOTO)
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">13. Shutdown Work Execution & Quality</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Professional Work During Shutdown</h4>
+                <ul>
+                  <li><strong>Complete tasks per planned scope</strong> - Stay focused, don't add unplanned work</li>
+                  <li><strong>Maintain clean work practices</strong> - Keep work area organized, tools accounted for</li>
+                  <li><strong>Document all changes and modifications</strong> - Mark up drawings in real-time</li>
+                  <li><strong>Take photos of work before closing up</strong> - Document terminations, routing, connections</li>
+                  <li><strong>Torque all terminal connections per spec</strong> - Use calibrated torque tools, document values</li>
+                  <li><strong>Test circuits as work progresses</strong> - Continuity, insulation resistance as applicable</li>
+                  <li><strong>Label all new circuits and equipment</strong> - Complete identification before re-energizing</li>
+                  <li><strong>Have work inspected if required</strong> - By foreman, PM, or inspector before closing</li>
+                  <li><strong>Account for all tools before energizing</strong> - Nothing left inside gear</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Shutdown work must be done right the first time. Extended shutdowns cost customers money. Quality work prevents callbacks and re-shutdowns.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Poor Execution</h4>
+                <ul>
+                  <li>Adding unplanned work (delays shutdown)</li>
+                  <li>Disorganized work area (tools/materials everywhere)</li>
+                  <li>Not documenting changes (lost information)</li>
+                  <li>Connections not torqued to spec</li>
+                  <li>Skipping testing</li>
+                  <li>Missing or incomplete labels</li>
+                  <li>No inspection before re-energizing</li>
+                  <li>Tools left inside equipment (DANGEROUS)</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> NEC 110.14(D) (Torque requirements), NEC 110.12 (Workmanship), Company quality standards
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">14. Re-Energization & System Restoration</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Safe Re-Energization</h4>
+                <ul>
+                  <li><strong>Conduct final checks before energizing</strong> - All work complete, inspected, and approved</li>
+                  <li><strong>Verify all tools and personnel clear of equipment</strong> - Visual inspection of all areas</li>
+                  <li><strong>Remove LOTO devices in proper order</strong> - Only person who applied lock removes it</li>
+                  <li><strong>Follow written re-energization sequence</strong> - Typically upstream to downstream</li>
+                  <li><strong>Energize system step-by-step</strong> - Main first, then distribution, then branch circuits</li>
+                  <li><strong>Monitor each step for problems</strong> - Listen for arcing, check for heating, verify operation</li>
+                  <li><strong>Test all circuits for proper operation</strong> - Verify voltage, phase rotation, equipment function</li>
+                  <li><strong>Conduct post-shutdown walkthrough with facility rep</strong> - Verify all systems operating normally</li>
+                  <li><strong>Document any issues or anomalies</strong> - Note for follow-up or future reference</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Proper re-energization prevents equipment damage and identifies problems before they become emergencies. Facility walkthrough confirms successful completion.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Unsafe Re-Energization</h4>
+                <ul>
+                  <li>Energizing without final checks</li>
+                  <li>Not verifying personnel are clear</li>
+                  <li>Removing someone else's LOTO device</li>
+                  <li>Wrong energization sequence</li>
+                  <li>Energizing everything at once (unsafe)</li>
+                  <li>Not monitoring during energization</li>
+                  <li>Skipping circuit testing</li>
+                  <li>No post-shutdown verification with facility</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> NFPA 70E (Re-energization procedures), OSHA 1910.147 (LOTO removal), Company procedures
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">15. Shutdown Documentation & Closeout</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Complete Documentation</h4>
+                <ul>
+                  <li><strong>Update as-builts immediately after shutdown</strong> - While changes are fresh in mind</li>
+                  <li><strong>Complete all redlines on drawings</strong> - Mark all field changes, routing modifications, added circuits</li>
+                  <li><strong>Update panel schedules and labels</strong> - Reflect new circuits or modifications</li>
+                  <li><strong>Document all torque values recorded</strong> - Keep records for warranty and future reference</li>
+                  <li><strong>Complete shutdown checklist</strong> - Verify all steps were completed</li>
+                  <li><strong>File all documentation</strong> - Shutdown plan, LOTO records, test results, photos</li>
+                  <li><strong>Conduct internal debrief (optional but recommended)</strong> - Discuss what went well, what to improve</li>
+                  <li><strong>Document lessons learned</strong> - Note for future shutdowns on this or similar projects</li>
+                  <li><strong>Provide closeout documentation to PM</strong> - As-builts, test results, completion confirmation</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Complete documentation protects company from liability, provides accurate records for customer, and captures lessons learned for continuous improvement.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Poor Documentation</h4>
+                <ul>
+                  <li>Not updating as-builts (information lost)</li>
+                  <li>Missing redlines or field changes</li>
+                  <li>Panel schedules not updated</li>
+                  <li>No torque documentation</li>
+                  <li>Incomplete shutdown checklist</li>
+                  <li>Poor filing or missing records</li>
+                  <li>No debrief or lessons learned captured</li>
+                  <li>Incomplete closeout to PM</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> Contract requirements, Company documentation standards, Quality management procedures
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- PANEL INSTALLATIONS -->
+      <div class="category">
+        <div class="category-header" onclick="toggleCategory('panels')">
+          <span class="category-title">Panel Installations</span>
+          <span class="toggle-icon">▼</span>
+        </div>
+        <div id="panels" class="category-content">
+          
+          <div class="standard">
+            <div class="standard-title">1. Panel Wire Dressing</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Professional Wire Dressing</h4>
+                <ul>
+                  <li><strong>All wires run parallel and grouped by circuit</strong></li>
+                  <li><strong>Neutral and ground wires separated and organized</strong></li>
+                  <li><strong>Wires trimmed to appropriate length</strong> - no excessive slack but enough for service</li>
+                  <li><strong>Wires labeled at panel entry</strong> for easy troubleshooting</li>
+                  <li><strong>Hot wires dressed on left side, neutrals on right</strong> (consistent approach)</li>
+                  <li><strong>90-degree bends, not kinked or twisted</strong></li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Professional wire dressing makes troubleshooting faster, shows quality craftsmanship, and reduces the chance of inspection failures or callbacks.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Poor Wire Dressing</h4>
+                <ul>
+                  <li>Wires crossing over each other randomly ("rat's nest")</li>
+                  <li>Excessive wire length coiled inside panel</li>
+                  <li>Wires bent at sharp angles or kinked</li>
+                  <li>No clear organization or routing pattern</li>
+                  <li>Neutrals and grounds mixed together</li>
+                  <li>Makes future work difficult and looks unprofessional</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> NEC 110.12 (Mechanical Execution of Work), NEC 408.3 (Support and Arrangement of Busbars and Conductors)
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">2. Panel Torque Specifications</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Proper Torquing</h4>
+                <ul>
+                  <li><strong>Use calibrated torque screwdriver or wrench</strong></li>
+                  <li><strong>Follow manufacturer's torque specifications</strong> (typically printed inside panel door)</li>
+                  <li><strong>Common specs: 14-12 AWG = 12-15 in-lbs, 10-8 AWG = 30-35 in-lbs</strong></li>
+                  <li><strong>Torque main lugs per panel schedule</strong> (usually 30-50 in-lbs depending on size)</li>
+                  <li><strong>Document torque values in installation log</strong></li>
+                  <li><strong>Re-check torque after initial tightening</strong> (wires can settle)</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Under-torqued connections cause arcing, overheating, and fire risk. Over-torquing damages wire and terminals. Proper torque is a code requirement and critical safety issue.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Improper Torquing</h4>
+                <ul>
+                  <li>Hand-tightening only ("feels tight enough")</li>
+                  <li>Using regular screwdrivers without torque measurement</li>
+                  <li>Over-tightening and damaging conductors</li>
+                  <li>Not following manufacturer specifications</li>
+                  <li>No documentation of torque values</li>
+                  <li>Skipping torque check on critical connections</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> NEC 110.3(B) (Installation per manufacturer instructions), NEC 110.14(D) (Terminal connection torque)
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">3. Panel Labeling & Schedules</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Clear Panel Identification</h4>
+                <ul>
+                  <li><strong>Panel schedule completely filled out</strong> with circuit numbers, locations, and loads</li>
+                  <li><strong>Directory typed or neatly hand-printed</strong> and legible</li>
+                  <li><strong>Panel designation clearly marked</strong> (e.g., "PANEL A")</li>
+                  <li><strong>Voltage and phase marked on panel cover</strong></li>
+                  <li><strong>Arc flash label affixed if required</strong></li>
+                  <li><strong>Schedule matches as-built conditions</strong> - updated if circuits changed during construction</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Accurate labeling is required by code and essential for safety. Emergency responders and facility staff need to quickly identify circuits.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Poor Labeling</h4>
+                <ul>
+                  <li>Blank panel schedule</li>
+                  <li>Illegible handwriting</li>
+                  <li>Generic labels like "Lights" or "Plugs" without locations</li>
+                  <li>Schedule doesn't match actual circuit layout</li>
+                  <li>Missing voltage or arc flash labels</li>
+                  <li>Pencil labels that fade or smudge</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> NEC 408.4 (Circuit Directory), NEC 110.16 (Arc Flash Warning)
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">4. Panel Pre-Installation Checks</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Before Installation</h4>
+                <ul>
+                  <li><strong>Review electrical drawings and specifications</strong> - Verify panel location, type, and rating</li>
+                  <li><strong>Verify panel rating matches project requirements</strong> - Voltage, amperage, phase, and configuration</li>
+                  <li><strong>Check clearance requirements</strong> - Working clearance typically 36" (NEC 110.26)</li>
+                  <li><strong>Ensure proper permit and inspection schedule</strong> - Coordinate with authority having jurisdiction</li>
+                  <li><strong>Perform LOTO if working near live circuits</strong> - Verify zero energy state</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Pre-installation verification prevents costly rework. Installing wrong panel or violating clearances causes failed inspections.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Skipping Verification</h4>
+                <ul>
+                  <li>Installing panel without reviewing drawings</li>
+                  <li>Wrong panel rating for application</li>
+                  <li>Insufficient working clearance</li>
+                  <li>Missing permits</li>
+                  <li>Working near energized parts without LOTO</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> NEC 110.26 (Working Spaces), OSHA 1910.147 (LOTO), NEC 408.3
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">5. Panel Mounting Procedure</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Mounting Standards</h4>
+                <ul>
+                  <li><strong>Use level to ensure panel is plumb</strong> - Check both vertical and horizontal</li>
+                  <li><strong>Secure to wall studs or backing</strong> - Minimum 4 mounting points, use appropriate fasteners</li>
+                  <li><strong>Standard mounting height</strong> - Top of panel at 78" AFF (or per spec)</li>
+                  <li><strong>Install conduit entries properly</strong> - Use proper connectors, maintain NEC bending radius</li>
+                  <li><strong>Verify enclosure type matches location</strong> - NEMA 1 for dry, NEMA 3R for exterior, etc.</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Proper mounting prevents panel from becoming loose over time. Level installation looks professional and ensures door operation.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Mounting Issues</h4>
+                <ul>
+                  <li>Panel not level (door won't close properly)</li>
+                  <li>Insufficient mounting points (panel loose)</li>
+                  <li>Wrong enclosure type for location</li>
+                  <li>Improper conduit connections</li>
+                  <li>Mounted too high or too low for accessibility</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> NEC 110.26 (Access and working space), NEC 312.2 (Enclosure types), Manufacturer installation instructions
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">6. Panel Wire Routing & Termination</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Wire Installation</h4>
+                <ul>
+                  <li><strong>Route incoming feeder wires cleanly into panel</strong> - Proper cable support at entry</li>
+                  <li><strong>Strip and terminate to main breaker lugs per torque specs</strong> - Use calibrated torque tools</li>
+                  <li><strong>Route branch circuits organized by circuit number</strong> - Group related circuits together</li>
+                  <li><strong>Terminate neutrals and grounds to proper bars</strong> - Separate in subpanels</li>
+                  <li><strong>Leave adequate service loop</strong> - Enough to pull breaker out for service</li>
+                  <li><strong>Document all torque values</strong> - Record in installation log</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Proper routing and termination prevents loose connections (fire hazard), makes future service easier, and ensures code compliance.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Poor Installation</h4>
+                <ul>
+                  <li>Wires too tight (no service loop)</li>
+                  <li>Connections not torqued to spec</li>
+                  <li>Disorganized wire routing</li>
+                  <li>Mixing neutrals and grounds in subpanels</li>
+                  <li>No torque documentation</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> NEC 110.14 (Electrical connections), NEC 408.40 (Grounding), NEC 110.14(D) (Torque requirements)
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">7. Panel Grounding & Bonding</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Grounding Standards</h4>
+                <ul>
+                  <li><strong>Install panel ground bar if not pre-installed</strong> - Proper size for number of circuits</li>
+                  <li><strong>Connect ground conductor to main ground electrode system</strong> - Proper size per NEC 250</li>
+                  <li><strong>SERVICE PANELS: Bond neutral to ground</strong> - Main bonding jumper required</li>
+                  <li><strong>SUBPANELS: Keep neutral isolated from ground</strong> - Separate neutral and ground bars</li>
+                  <li><strong>Verify all metal parts bonded</strong> - Panel enclosure, conduits, metallic raceways</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> CRITICAL SAFETY ISSUE. Improper grounding/bonding causes shock hazard and ground faults. This is the #1 inspection failure item.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Grounding Violations</h4>
+                <ul>
+                  <li>Neutral bonded to ground in subpanel (MAJOR VIOLATION)</li>
+                  <li>Undersized ground conductor</li>
+                  <li>No main bonding jumper in service panel</li>
+                  <li>Metal enclosure not bonded</li>
+                  <li>Missing ground connection to electrode system</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> NEC 250.24 (Service grounding), NEC 250.32 (Subpanel grounding), NEC 250.142
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">8. Panel Energization & Testing</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Safe Power-Up</h4>
+                <ul>
+                  <li><strong>Supervisor inspection before energization</strong> - Verify all terminations, torques, and grounding</li>
+                  <li><strong>Confirm LOTO removed if previously applied</strong> - Follow proper de-energization procedures</li>
+                  <li><strong>Turn on main breaker first</strong> - Verify voltage at panel</li>
+                  <li><strong>Test each branch circuit individually</strong> - Check for proper operation and voltage</li>
+                  <li><strong>NEVER energize alone</strong> - Always have qualified person present</li>
+                  <li><strong>Document testing results</strong> - Completion report for client/inspector</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Proper energization procedures prevent shock, arc flash, and equipment damage. Having two people present is essential safety practice.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Unsafe Practices</h4>
+                <ul>
+                  <li>Energizing without inspection</li>
+                  <li>Working alone on panel energization</li>
+                  <li>Not verifying voltage before testing</li>
+                  <li>Skipping circuit-by-circuit testing</li>
+                  <li>No documentation of energization</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> NFPA 70E (Arc flash safety), OSHA 1910.333 (Working on energized parts), Company safety procedures
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- CONDUIT & RACEWAY -->
+      <div class="category">
+        <div class="category-header" onclick="toggleCategory('conduit')">
+          <span class="category-title">Conduit & Raceway Work</span>
+          <span class="toggle-icon">▼</span>
+        </div>
+        <div id="conduit" class="category-content">
+          
+          <div class="standard">
+            <div class="standard-title">1. Conduit Bending Standards</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Professional Bends</h4>
+                <ul>
+                  <li><strong>Smooth, uniform radius bends</strong> - No kinks or flat spots</li>
+                  <li><strong>Maintain minimum radius per NEC</strong> - 6x conduit diameter for one-shot bends</li>
+                  <li><strong>90° bends are actually 90°</strong> - Use level to verify</li>
+                  <li><strong>Parallel runs stay in same plane</strong> - Consistent offset distances</li>
+                  <li><strong>Offsets match and align</strong> when multiple conduits run together</li>
+                  <li><strong>CRITICAL: Match all bends on parallel conduits</strong> - Bends should be mirror images at same locations</li>
+                  <li><strong>Align couplings on parallel runs</strong> - All couplings at same distance from reference point (looks professional)</li>
+                  <li><strong>Use consistent spacing between parallel conduits</strong> - Typically 2"-4" apart, maintain throughout run</li>
+                  <li><strong>Clean, deburred cuts</strong> before bending</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Professional bends are easier to pull wire through, look better, meet code requirements, and show quality craftsmanship. Matched bends and aligned couplings demonstrate attention to detail.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Poor Bends</h4>
+                <ul>
+                  <li>Kinked or flattened conduit</li>
+                  <li>Too-tight radius (makes wire pulling difficult)</li>
+                  <li>Misaligned parallel runs</li>
+                  <li>Bends not square (off by 10-15 degrees)</li>
+                  <li>Dog-legs in conduit runs</li>
+                  <li>Bends on parallel conduits at different locations (sloppy)</li>
+                  <li>Couplings scattered randomly on parallel runs</li>
+                  <li>Inconsistent spacing between parallel conduits</li>
+                  <li>Rough, un-deburred cuts that damage wire</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> NEC 344.24 (EMT bends), NEC 344.26 (Number of bends), NEC 300.4 (Protection from damage), NEC 110.12 (Workmanship)
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">2. Conduit Support & Strapping</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Proper Support</h4>
+                <ul>
+                  <li><strong>EMT supported within 3' of boxes/fittings</strong> and every 10' thereafter</li>
+                  <li><strong>Straps tight but not over-tightened</strong> - Don't deform conduit</li>
+                  <li><strong>Use proper strap type for application</strong> - One-hole, two-hole, or Minerallac</li>
+                  <li><strong>Parallel runs strapped together</strong> using stacked straps or unistrut</li>
+                  <li><strong>Straps aligned and level on parallel conduits</strong> - All at same height/location</li>
+                  <li><strong>On conduit racks: align all straps/supports vertically</strong> - Creates professional grid pattern</li>
+                  <li><strong>Maintain consistent spacing between parallel conduits</strong> - Typically 2"-4", keep uniform throughout</li>
+                  <li><strong>Conduit runs plumb and level</strong> - Unless following structure</li>
+                  <li><strong>All couplings aligned on parallel runs</strong> - Same distance from panel or reference point</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Proper support prevents sagging, meets code requirements, and makes the installation look professional. Aligned straps and couplings show quality craftsmanship and attention to detail.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Poor Support</h4>
+                <ul>
+                  <li>Straps spaced too far apart (>10')</li>
+                  <li>No support within 3' of terminations</li>
+                  <li>Sagging conduit runs</li>
+                  <li>Over-tightened straps crushing conduit</li>
+                  <li>Misaligned straps on parallel runs (looks sloppy)</li>
+                  <li>Inconsistent spacing between parallel conduits</li>
+                  <li>Couplings at random locations on parallel runs</li>
+                  <li>Conduit not plumb/level</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> NEC 344.30 (EMT securing and supporting), NEC 352.30 (PVC support), NEC 110.12 (Workmanship), Varies by conduit type
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">3. Conduit Terminations & Fittings</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Clean Terminations</h4>
+                <ul>
+                  <li><strong>Set screw connectors tight</strong> - Use two screws when available</li>
+                  <li><strong>Compression fittings properly compressed</strong> - Verify indicator is flush</li>
+                  <li><strong>Bushings on all conduit terminations</strong> - Protect wire insulation</li>
+                  <li><strong>Couplings aligned and tight</strong> - No gaps between conduit and coupling</li>
+                  <li><strong>Conduit cut square</strong> - Clean, deburred ends</li>
+                  <li><strong>Weatherproof fittings in wet locations</strong> - Myers hubs or approved seals</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Proper terminations prevent water intrusion, protect wire insulation, and ensure conduit system integrity for grounding.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Poor Terminations</h4>
+                <ul>
+                  <li>Loose connectors (can pull out)</li>
+                  <li>Missing bushings (wires damaged on sharp edges)</li>
+                  <li>Gaps in couplings</li>
+                  <li>Non-weatherproof fittings in exterior locations</li>
+                  <li>Conduit not fully inserted into fittings</li>
+                  <li>Angled cuts (not square)</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> NEC 300.4 (Protection from damage), NEC 300.5 (Underground), NEC 314.17 (Conductors entering boxes)
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ROUGH-IN WORK -->
+      <div class="category">
+        <div class="category-header" onclick="toggleCategory('roughin')">
+          <span class="category-title">Rough-In Work</span>
+          <span class="toggle-icon">▼</span>
+        </div>
+        <div id="roughin" class="category-content">
+          
+          <div class="standard">
+            <div class="standard-title">1. Device Rough-In Heights</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Standard Heights</h4>
+                <ul>
+                  <li><strong>Switches: 44" to center</strong> - Avoids conflicts with FRP, partial tile in restrooms/kitchens</li>
+                  <li><strong>Standard receptacles: 18" to center</strong> - Measured from finished floor</li>
+                  <li><strong>Counter receptacles: 42-44" AFF</strong> - Typically 4" above counter</li>
+                  <li><strong>ADA receptacles: 15"-48" AFF</strong> - Verify project-specific ADA requirements</li>
+                  <li><strong>Data/low voltage: Match power device heights</strong> - Keep consistent for appearance</li>
+                  <li><strong>Verify with plans for special heights</strong> - Some specs vary</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Consistent heights look professional and meet accessibility codes. 44" switch height prevents conflicts with wall finishes common in commercial work.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Inconsistent Heights</h4>
+                <ul>
+                  <li>Switches at varying heights (45", 48", 50")</li>
+                  <li>Receptacles not at standard height</li>
+                  <li>Devices conflicting with tile or FRP</li>
+                  <li>ADA violations (too high or too low)</li>
+                  <li>Devices not aligned horizontally when grouped</li>
+                  <li>Not checking finished floor elevation</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> ADA Standards (308.2 - Reach ranges), Local building codes, Project specifications
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">2. Box Installation & Securing</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Proper Box Mounting</h4>
+                <ul>
+                  <li><strong>Boxes securely fastened to framing</strong> - No movement when pushed</li>
+                  <li><strong>Box flush with finished wall surface</strong> - Account for drywall thickness</li>
+                  <li><strong>Boxes plumb and level</strong> - Use level to verify</li>
+                  <li><strong>Proper box size for number of conductors</strong> - Follow NEC fill calculations</li>
+                  <li><strong>Mud rings properly sized for tile/finish thickness</strong></li>
+                  <li><strong>Nail-on boxes nailed solidly to studs</strong> - Use all nail holes</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Properly mounted boxes prevent devices from being recessed or protruding, allow covers to fit correctly, and meet code requirements.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Poor Box Installation</h4>
+                <ul>
+                  <li>Boxes loose or moving</li>
+                  <li>Recessed too deep or sticking out</li>
+                  <li>Boxes not level (switches/receptacles angled)</li>
+                  <li>Overcrowded boxes (too many wires)</li>
+                  <li>Wrong mud ring depth for finish</li>
+                  <li>Partially nailed boxes (will loosen over time)</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> NEC 314.20 (Box installation), NEC 314.16 (Box fill calculations), NEC 314.23 (Supporting boxes)
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">3. MC Cable Rough-In - Metal Studs</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - MC Cable Installation in Metal Studs</h4>
+                <ul>
+                  <li><strong>Pre-installation review complete</strong> - Check drawings, device schedule, risers before starting</li>
+                  <li><strong>Verify mud ring depth for drywall thickness</strong> - Typically 5/8" for standard drywall</li>
+                  <li><strong>Mark all device locations on studs</strong> - Use standard heights (18" receptacles, 44" switches)</li>
+                  <li><strong>Use stud-mount boxes with adjustable supports</strong> - Caddy, Arlington, or similar brackets</li>
+                  <li><strong>Mount boxes flush to finished surface</strong> - Account for drywall thickness</li>
+                  <li><strong>Route MC through factory knockouts when possible</strong> - Or drill clean holes</li>
+                  <li><strong>Support MC: Within 12" of boxes, then every 6'</strong> - Use cable stackers or approved supports</li>
+                  <li><strong>Gentle bends only</strong> - Minimum 5x cable diameter, no kinks or sharp turns</li>
+                  <li><strong>Do NOT staple or use sharp straps on MC</strong> - Can damage cable armor</li>
+                  <li><strong>Keep organized cable runs</strong> - Bundle related circuits using cable stackers</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Proper planning and support prevents damage to MC cable armor and ensures professional, code-compliant installation.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Common MC/Metal Stud Mistakes</h4>
+                <ul>
+                  <li>Wrong mud ring depth (boxes recessed or protruding)</li>
+                  <li>Boxes not level or plumb</li>
+                  <li>Improper support spacing (too far apart)</li>
+                  <li>Sharp bends damaging cable armor and conductors</li>
+                  <li>Using wire staples on MC cable</li>
+                  <li>Missing box mounting brackets (loose boxes)</li>
+                  <li>Disorganized cable runs (difficult to trace)</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> NEC 330.30 (MC cable securing), NEC 330.40 (Bending radius), NEC 314.20 (Box installation)
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">4. MC Cable Terminations & Box Connections</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Proper MC Terminations</h4>
+                <ul>
+                  <li><strong>Strip MC jacket carefully</strong> - Avoid damaging conductor insulation</li>
+                  <li><strong>Use proper MC connectors at each box</strong> - Snap-in or screw-type, ensure clamp is tight</li>
+                  <li><strong>Leave proper wire length in box</strong> - 6" minimum from box opening per NEC</li>
+                  <li><strong>Install anti-short bushing</strong> - Red plastic bushing protects conductors from sharp MC edge</li>
+                  <li><strong>Bond metal boxes properly</strong> - Green grounding pigtail from box to ground wire</li>
+                  <li><strong>Label each box clearly</strong> - Circuit number, panel ID (e.g., "PNL-A CKT-12")</li>
+                  <li><strong>Secure MC cable within 12" of box entry</strong> - Required by code</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Proper terminations ensure good electrical connections and grounding. Missing anti-short bushings can cause shorts over time.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Termination Problems</h4>
+                <ul>
+                  <li>Damaged conductor insulation from rough MC cutting</li>
+                  <li>Wrong connector type or loose connections</li>
+                  <li>Insufficient wire length (can't reach devices)</li>
+                  <li>Missing anti-short bushings</li>
+                  <li>Metal box not grounded</li>
+                  <li>No circuit labels in boxes</li>
+                  <li>MC not secured near box (violates support requirements)</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> NEC 300.14 (Wire length in boxes), NEC 330.40 (MC cable connectors), NEC 250.148 (Box bonding)
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">5. Metal Stud Protection & Routing</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Cable Routing in Metal Studs</h4>
+                <ul>
+                  <li><strong>Use factory knockouts when possible</strong> - Pre-punched holes provide smoother passage</li>
+                  <li><strong>Avoid sharp edges when routing</strong> - Don't drag MC armor across rough metal edges</li>
+                  <li><strong>Coordinate routing with mechanical trades</strong> - Avoid conflicts, maintain clearances</li>
+                  <li><strong>Bundle related circuits together</strong> - Use cable stackers, keep organized</li>
+                  <li><strong>Maintain proper support spacing</strong> - First support within 12" of box, then every 6'</li>
+                  <li><strong>Keep cables away from mechanical damage areas</strong> - High-traffic zones, moving parts</li>
+                  <li><strong>Route cables neatly and parallel</strong> - Professional appearance, easier troubleshooting</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> MC cable's armor provides protection, but proper routing prevents damage and makes a professional installation that's easy to service.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Routing Problems</h4>
+                <ul>
+                  <li>Dragging MC armor across rough, sharp edges</li>
+                  <li>Cable routed through conflict zones with other trades</li>
+                  <li>Disorganized cable runs (hard to trace circuits)</li>
+                  <li>Improper support spacing</li>
+                  <li>Cables in high-damage areas without consideration</li>
+                  <li>Poor cable management (looks unprofessional)</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> NEC 330.30 (Support requirements), NEC 110.12 (Workmanship)
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">6. Rough-In Inspection Preparation</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Pre-Inspection Checklist</h4>
+                <ul>
+                  <li><strong>All boxes properly mounted and level</strong> - Walk through and verify each one</li>
+                  <li><strong>Correct mud ring depths installed</strong> - Match drywall thickness</li>
+                  <li><strong>All MC terminations secure</strong> - Tug test connectors</li>
+                  <li><strong>Anti-short bushings installed at MC terminations</strong> - Red plastic bushings protect conductors from cut MC edge</li>
+                  <li><strong>Proper support spacing verified</strong> - Within 12" of boxes, every 6' thereafter</li>
+                  <li><strong>All boxes labeled with circuit info</strong> - Circuit number and panel ID visible</li>
+                  <li><strong>Grounding pigtails installed in metal boxes</strong> - Proper bonding connections</li>
+                  <li><strong>Work area cleaned up</strong> - Remove scrap wire, packaging, debris</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Self-inspection before calling for rough-in inspection prevents failures and re-inspections. Catch problems while they're easy to fix.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Common Inspection Failures</h4>
+                <ul>
+                  <li>Boxes not level (devices will be crooked)</li>
+                  <li>Wrong mud ring depth (major rework)</li>
+                  <li>Missing anti-short bushings at MC terminations</li>
+                  <li>Support spacing violations</li>
+                  <li>No circuit labels</li>
+                  <li>Poor grounding/bonding</li>
+                  <li>Sloppy work area (reflects poorly)</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> NEC 110.12 (Workmanship), Local inspection requirements, Company QC standards
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">7. GFCI & AFCI Requirements</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Protection Requirements</h4>
+                <ul>
+                  <li><strong>GFCI required locations:</strong> Bathrooms, kitchens (within 6' of sink), garages, outdoors, crawlspaces, unfinished basements</li>
+                  <li><strong>AFCI required:</strong> All 15A and 20A branch circuits in dwelling units (bedrooms, living areas, etc.)</li>
+                  <li><strong>Proper device selection:</strong> GFCI receptacles or GFCI circuit breakers as specified</li>
+                  <li><strong>Label protected receptacles</strong> - "GFCI Protected" or "No Equipment Ground"</li>
+                  <li><strong>Test GFCI devices during installation</strong> - Verify proper operation before covering</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> GFCI and AFCI protection is code-required for safety. Missing protection = automatic inspection failure. Inspectors check this carefully.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Missing Protection</h4>
+                <ul>
+                  <li>Standard receptacles in GFCI-required locations</li>
+                  <li>Missing AFCI breakers in dwelling units</li>
+                  <li>GFCI wired incorrectly (line/load reversed)</li>
+                  <li>Not testing GFCI operation</li>
+                  <li>Missing required labels</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> NEC 210.8 (GFCI protection), NEC 210.12 (AFCI protection), NEC 406.4 (Receptacle requirements)
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- WIRING METHODS -->
+      <div class="category">
+        <div class="category-header" onclick="toggleCategory('wiring')">
+          <span class="category-title">Wiring Methods</span>
+          <span class="toggle-icon">▼</span>
+        </div>
+        <div id="wiring" class="category-content">
+          
+          <div class="standard">
+            <div class="standard-title">1. MC Cable Installation</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - MC Cable Standards</h4>
+                <ul>
+                  <li><strong>Proper support every 6 feet</strong> and within 12" of boxes</li>
+                  <li><strong>Use approved MC connectors</strong> - Not set screw type for NM</li>
+                  <li><strong>No sharp bends</strong> - Maintain 5x cable diameter minimum radius</li>
+                  <li><strong>Neat bundling when multiple cables</strong> - Use cable ties, avoid excessive bundling (heat)</li>
+                  <li><strong>Protect cables through framing</strong> - Steel plates where required by code</li>
+                  <li><strong>Anti-short bushing installed</strong> at cable termination</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Proper MC installation prevents damage to cable armor and internal conductors, maintains grounding integrity, and meets code.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - MC Cable Problems</h4>
+                <ul>
+                  <li>Improper support spacing</li>
+                  <li>Wrong connector type</li>
+                  <li>Sharp bends damaging conductors</li>
+                  <li>Excessive bundling causing heat buildup</li>
+                  <li>Missing anti-short bushings</li>
+                  <li>No protection through framing members</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> NEC 330.30 (MC cable securing), NEC 330.40 (MC cable bending radius), NEC 300.4 (Cable protection)
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">2. Wire Splicing & Junction Boxes</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Splicing Standards</h4>
+                <ul>
+                  <li><strong>All splices in accessible junction boxes</strong> - Never buried in walls or ceilings</li>
+                  <li><strong>Proper wire nut size for conductor count</strong> - Follow manufacturer sizing charts</li>
+                  <li><strong>Twist wires clockwise before wire nut</strong> - 3-4 twists minimum for solid bond</li>
+                  <li><strong>No bare copper exposed outside wire nut</strong> - Only insulated wire showing</li>
+                  <li><strong>Box cover installed and accessible</strong> - Paint covers to match if required</li>
+                  <li><strong>Box properly sized for conductors</strong> - Follow NEC fill calculations</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Accessible splices are code-required for future troubleshooting and safety. Poor splices cause loose connections, arcing, and fire risk.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Splice Violations</h4>
+                <ul>
+                  <li>Splices hidden in walls (MAJOR VIOLATION)</li>
+                  <li>Wrong wire nut size</li>
+                  <li>Wires not twisted together</li>
+                  <li>Bare copper exposed</li>
+                  <li>Junction box covered over and inaccessible</li>
+                  <li>Overcrowded boxes</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> NEC 314.29 (Junction boxes must be accessible), NEC 110.14 (Splicing methods), NEC 314.16 (Box fill)
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">3. Wire Color Coding</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Color Standards</h4>
+                <ul>
+                  <li><strong>120/208V 3-phase: Black, Red, Blue</strong> (phases A, B, C)</li>
+                  <li><strong>277/480V 3-phase: Brown, Orange, Yellow</strong> (phases A, B, C)</li>
+                  <li><strong>Neutral: White or Gray</strong> (always insulated white)</li>
+                  <li><strong>Ground: Green or bare copper</strong></li>
+                  <li><strong>Consistent phase identification throughout project</strong></li>
+                  <li><strong>Label high-leg (wild leg) orange in delta systems</strong></li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Consistent color coding prevents miswiring, makes troubleshooting easier, and is code-required for certain conductors.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Color Problems</h4>
+                <ul>
+                  <li>Random wire colors on phases</li>
+                  <li>Neutral colored other than white/gray</li>
+                  <li>Ground wire insulated in non-green color</li>
+                  <li>Inconsistent phasing between panels</li>
+                  <li>High-leg not identified</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> NEC 200.6 (Neutral identification), NEC 250.119 (Ground identification), NEC 110.15 (High-leg marking)
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">4. Wire Pulling Coordination & Schedule</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Planned Wire Pulling</h4>
+                <ul>
+                  <li><strong>Develop wire pulling schedule in advance</strong> - Coordinate with other trades, especially mechanical/fire sprinkler</li>
+                  <li><strong>Schedule large pulls when area is clear</strong> - Avoid conflicts with other trades working in same area</li>
+                  <li><strong>Plan pull crew and equipment needs</strong> - Wire reels, pull ropes, lubricant, power tuggers if needed</li>
+                  <li><strong>Coordinate with GC for large material deliveries</strong> - Wire reels need adequate space and access</li>
+                  <li><strong>Verify conduit installation complete and inspected</strong> - All conduits properly supported, no damaged conduit</li>
+                  <li><strong>Confirm conduit runs are clear</strong> - Pull test string through complex runs before wire pull</li>
+                  <li><strong>Plan pull direction and setup points</strong> - Feeding end, pulling end, intermediate support points</li>
+                  <li><strong>Assign crew responsibilities</strong> - Feeder, puller, box watchers, safety monitor</li>
+                  <li><strong>Document pulls as completed</strong> - Record date, circuits pulled, crew, any issues encountered</li>
+                  <li><strong>Test conductors after pulling</strong> - Continuity and insulation resistance (megger test) before terminating</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Coordinated wire pulling prevents damage to conductors, reduces conflicts with other trades, and ensures efficient crew utilization on large pulls.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Unplanned Pulling</h4>
+                <ul>
+                  <li>Pulling without coordination (conflicts with other trades)</li>
+                  <li>No pull crew planning (inefficient, understaffed)</li>
+                  <li>Wire reels delivered without adequate space</li>
+                  <li>Pulling through damaged or unsupported conduit</li>
+                  <li>Not checking if runs are clear (stuck pull)</li>
+                  <li>Poor crew positioning (difficult pull, potential damage)</li>
+                  <li>No documentation of completed pulls</li>
+                  <li>Not testing after pulling (damaged wires discovered at termination)</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> NEC 310.15 (Ampacity), Company pulling procedures, Conductor manufacturer installation guidelines
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- GROUNDING & BONDING -->
+      <div class="category">
+        <div class="category-header" onclick="toggleCategory('grounding')">
+          <span class="category-title">Grounding & Bonding</span>
+          <span class="toggle-icon">▼</span>
+        </div>
+        <div id="grounding" class="category-content">
+          
+          <div class="standard">
+            <div class="standard-title">1. Equipment Grounding</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Grounding Standards</h4>
+                <ul>
+                  <li><strong>Green or bare ground wire in all circuits</strong> - Sized per NEC 250.122</li>
+                  <li><strong>All metal boxes bonded</strong> - Ground screw or clip to box</li>
+                  <li><strong>Metal conduit properly bonded</strong> - Threadless fittings, locknuts tight</li>
+                  <li><strong>Receptacles properly grounded</strong> - Ground wire to green screw</li>
+                  <li><strong>Metallic raceways continuous</strong> - No gaps in grounding path</li>
+                  <li><strong>Ground wires continuous</strong> - No splices unless in accessible box</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Proper grounding provides fault current path, prevents shock hazard, and is critical for safety. This is non-negotiable.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Grounding Violations</h4>
+                <ul>
+                  <li>Missing ground wires</li>
+                  <li>Undersized ground conductors</li>
+                  <li>Metal boxes not bonded</li>
+                  <li>Loose locknuts (poor bonding)</li>
+                  <li>Ground spliced in inaccessible location</li>
+                  <li>Receptacles with no ground connection</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> NEC 250.118 (Equipment grounding conductors), NEC 250.122 (Sizing), NEC 250.148 (Bonding)
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">2. Grounding Electrode System</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Electrode System</h4>
+                <ul>
+                  <li><strong>Connect to all available electrodes</strong> - Water pipe, ground rods, building steel</li>
+                  <li><strong>Ground rods: 8' minimum depth</strong> - Two rods required if resistance >25 ohms</li>
+                  <li><strong>Rods spaced minimum 6' apart</strong></li>
+                  <li><strong>Proper conductor size</strong> - Sized per NEC 250.66 (typically #6 Cu minimum)</li>
+                  <li><strong>Grounding electrode conductor protected</strong> - In raceway if subject to damage</li>
+                  <li><strong>Water pipe bond within 5' of entry</strong> - Before any joints or meters</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Grounding electrode system provides path to earth for fault currents and lightning protection. Required by code and critical for safety.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Electrode Problems</h4>
+                <ul>
+                  <li>Single ground rod when two required</li>
+                  <li>Rods too close together</li>
+                  <li>Undersized grounding conductor</li>
+                  <li>Water pipe not bonded</li>
+                  <li>Grounding conductor not protected</li>
+                  <li>Missing connection to building steel</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> NEC 250.50 (Grounding electrode system), NEC 250.52 (Electrode types), NEC 250.66 (Conductor sizing)
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- CIRCUIT & EQUIPMENT LABELING -->
+      <div class="category">
+        <div class="category-header" onclick="toggleCategory('labeling')">
+          <span class="category-title">Circuit & Equipment Labeling</span>
+          <span class="toggle-icon">▼</span>
+        </div>
+        <div id="labeling" class="category-content">
+          
+          <div class="standard">
+            <div class="standard-title">1. Panel & Circuit Directory Labeling</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Panel Labeling Standards</h4>
+                <ul>
+                  <li><strong>Panel directory completely filled out</strong> - Circuit number, location served, load description</li>
+                  <li><strong>Use specific, clear descriptions</strong> - "Break Room Receptacles North Wall" not just "Receptacles"</li>
+                  <li><strong>Include room numbers or area designations</strong> - Match architectural drawings (e.g., "Room 201 Lighting")</li>
+                  <li><strong>Label panel designation clearly on cover</strong> - "PANEL A", "LP-1", etc. matches one-line diagram</li>
+                  <li><strong>Mark voltage and phase on panel cover</strong> - "208V 3-PHASE 4-WIRE" or "480Y/277V"</li>
+                  <li><strong>Include arc flash label if required</strong> - Per NEC 110.16 and NFPA 70E calculations</li>
+                  <li><strong>Typed or neatly printed labels</strong> - Use label maker or computer-generated labels when possible</li>
+                  <li><strong>Update directory when changes occur</strong> - Keep as-built condition, not original design</li>
+                  <li><strong>Laminate panel schedules if exterior location</strong> - Weather protection</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Accurate panel directories are code-required and critical for emergency responders, facility staff, and future troubleshooting. Generic labels are useless in emergencies.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Poor Panel Labeling</h4>
+                <ul>
+                  <li>Blank or incomplete panel directory</li>
+                  <li>Generic descriptions ("Lights", "Plugs", "Equipment")</li>
+                  <li>No room numbers or specific locations</li>
+                  <li>Panel designation missing or wrong</li>
+                  <li>No voltage or arc flash labels</li>
+                  <li>Illegible handwriting</li>
+                  <li>Directory doesn't match actual circuits</li>
+                  <li>Pencil labels that fade or smudge</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> NEC 408.4 (Circuit directory), NEC 110.16 (Arc flash warning), NEC 110.22 (Identification of disconnecting means)
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">2. Junction Box & Device Box Labeling</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Box Identification</h4>
+                <ul>
+                  <li><strong>Label every junction box during rough-in</strong> - Circuit number and panel ID (e.g., "PNL-A CKT-12")</li>
+                  <li><strong>Label all device boxes during rough-in</strong> - Helps with troubleshooting before drywall goes up</li>
+                  <li><strong>Write labels on box itself or mud ring</strong> - Permanent marker on visible surface</li>
+                  <li><strong>Include voltage if multiple systems present</strong> - "277V" or "120V" where both exist</li>
+                  <li><strong>Label homerun conduits/cables</strong> - Mark at panel and at first box</li>
+                  <li><strong>Special circuit labels</strong> - "EMERGENCY", "UPS", "DEDICATED", "CRITICAL" as applicable</li>
+                  <li><strong>Multi-circuit boxes labeled clearly</strong> - List all circuits present (e.g., "CKT 1,3,5,7")</li>
+                  <li><strong>Labels remain legible after drywall/painting</strong> - Use permanent marker or label tape</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Box labeling during rough-in makes troubleshooting infinitely easier, helps inspectors verify circuits, and assists with final device installation.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Missing Box Labels</h4>
+                <ul>
+                  <li>No labels on junction boxes</li>
+                  <li>Device boxes not labeled during rough-in</li>
+                  <li>Labels that wash off or fade</li>
+                  <li>No voltage identification</li>
+                  <li>Homerun routing not marked</li>
+                  <li>Special circuits not identified</li>
+                  <li>Multi-circuit boxes labeled ambiguously</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> NEC 110.22 (Identification), Best practices for field identification
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">3. Equipment & Disconnect Labeling</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Equipment Identification</h4>
+                <ul>
+                  <li><strong>Label all equipment disconnects clearly</strong> - Equipment served (e.g., "RTU-1 DISCONNECT", "CHILLER #2")</li>
+                  <li><strong>Mark voltage, phase, and amperage</strong> - "480V 3Ø 60A" clearly visible on disconnect</li>
+                  <li><strong>Identify supply source on disconnect</strong> - "FED FROM MDP-A CKT 14"</li>
+                  <li><strong>Label equipment to match drawings</strong> - Use same designation as electrical plans and schedules</li>
+                  <li><strong>Mark transformer primary and secondary</strong> - "PRIMARY 480V", "SECONDARY 208V" on enclosure</li>
+                  <li><strong>Generator labels complete</strong> - Voltage, frequency, capacity, fuel type, ATS location</li>
+                  <li><strong>Emergency equipment identified</strong> - "EMERGENCY POWER", "LIFE SAFETY", "EXIT SIGN CIRCUIT"</li>
+                  <li><strong>Use durable label materials</strong> - Engraved phenolic or laminated labels for permanent installations</li>
+                  <li><strong>Arc flash labels on all equipment</strong> - Per NFPA 70E where required</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Equipment labeling is code-required and essential for safe operation, maintenance, and emergency situations. Clear identification prevents wrong equipment shutdown.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Poor Equipment Labels</h4>
+                <ul>
+                  <li>Equipment disconnects not labeled</li>
+                  <li>No voltage or amperage marked</li>
+                  <li>Supply source not identified</li>
+                  <li>Equipment doesn't match drawing designations</li>
+                  <li>Transformer primary/secondary not marked</li>
+                  <li>Emergency equipment not identified</li>
+                  <li>Temporary labels (tape, handwritten)</li>
+                  <li>Missing arc flash labels</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> NEC 110.22 (Equipment identification), NEC 110.16 (Arc flash), NEC 445.18 (Generator marking)
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">4. Conduit & Cable Identification</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Raceway & Cable Labeling</h4>
+                <ul>
+                  <li><strong>Label conduits at panels and major junction points</strong> - Circuit numbers or cable designation</li>
+                  <li><strong>Mark voltage on conduits with multiple systems</strong> - Color code or labels: "480V", "277V", "120V"</li>
+                  <li><strong>High-leg marked orange</strong> - Delta systems, high-leg conductor and conduit identified per NEC 110.15</li>
+                  <li><strong>Emergency circuits identified</strong> - Red conduit, raceway, or labels per local requirements</li>
+                  <li><strong>Communications/data cables labeled</strong> - Even though low voltage, label for identification</li>
+                  <li><strong>Fire alarm circuits clearly marked</strong> - Red raceway or clear labeling throughout run</li>
+                  <li><strong>Spare conduits labeled</strong> - "SPARE" with size and termination points marked</li>
+                  <li><strong>Underground conduits marked at terminations</strong> - Routing, voltage, circuit designation</li>
+                  <li><strong>Cable tray circuits labeled</strong> - Tag cables at pull boxes and equipment terminations</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Conduit identification prevents voltage confusion (dangerous), makes troubleshooting easier, and helps future modifications/additions.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Missing Raceway Labels</h4>
+                <ul>
+                  <li>Conduits not labeled at panels</li>
+                  <li>No voltage identification</li>
+                  <li>High-leg not marked (code violation)</li>
+                  <li>Emergency circuits not identified</li>
+                  <li>Communications cables not labeled</li>
+                  <li>Fire alarm not properly marked</li>
+                  <li>Spare conduits not identified</li>
+                  <li>Underground runs not labeled</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> NEC 110.15 (High-leg identification), NEC 700.10 (Emergency system identification), Local AHJ requirements
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">5. Device & Receptacle Labeling</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Device Identification</h4>
+                <ul>
+                  <li><strong>Label GFCI-protected receptacles</strong> - "GFCI Protected" or "No Equipment Ground" as applicable per NEC</li>
+                  <li><strong>Mark isolated ground receptacles</strong> - Orange triangle or "IG" designation visible</li>
+                  <li><strong>Identify dedicated equipment receptacles</strong> - "DEDICATED - [Equipment Name]"</li>
+                  <li><strong>Multi-voltage installations marked clearly</strong> - Color-coded faceplates or labels: "208V", "120V", etc.</li>
+                  <li><strong>Emergency power receptacles identified</strong> - Red coverplate or "EMERGENCY POWER" label</li>
+                  <li><strong>Arc fault protected circuits labeled</strong> - "AFCI Protected" where required</li>
+                  <li><strong>Special use receptacles marked</strong> - "SURGE PROTECTED", "UPS", "HOSPITAL GRADE"</li>
+                  <li><strong>Switched receptacle identification</strong> - Label which outlet is switched if split receptacle</li>
+                  <li><strong>High-voltage devices marked</strong> - 208V or 240V receptacles clearly identified to prevent wrong equipment connection</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Device labeling prevents equipment damage from wrong voltage connection, identifies protection features, and meets code requirements.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Device Label Failures</h4>
+                <ul>
+                  <li>GFCI receptacles not marked (code violation)</li>
+                  <li>Isolated ground not identified</li>
+                  <li>No dedicated equipment labels</li>
+                  <li>Multi-voltage with no identification (dangerous)</li>
+                  <li>Emergency power not marked</li>
+                  <li>AFCI protection not labeled</li>
+                  <li>Special features not identified</li>
+                  <li>High-voltage receptacles unmarked (equipment damage risk)</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> NEC 406.4(D)(5) (GFCI labeling), NEC 210.8 (GFCI protection), NEC 517.16 (Healthcare labeling)
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- EQUIPMENT CONNECTIONS & DISCONNECTS -->
+      <div class="category">
+        <div class="category-header" onclick="toggleCategory('equipment')">
+          <span class="category-title">Equipment Connections & Disconnects</span>
+          <span class="toggle-icon">▼</span>
+        </div>
+        <div id="equipment" class="category-content">
+          
+          <div class="standard">
+            <div class="standard-title">1. Cord Drop Pre-Installation</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Planning Requirements</h4>
+                <ul>
+                  <li><strong>Review electrical plans for approved drop locations</strong> - Verify placement with GC/architect</li>
+                  <li><strong>Confirm ceiling structure and grid type</strong> - T-bar, hard lid, or other system</li>
+                  <li><strong>Verify correct cord drop type</strong> - MC whip, SO cord, or drop box with plug per spec</li>
+                  <li><strong>Confirm mounting height and device type</strong> - Standard drop height 6-7 ft AFF</li>
+                  <li><strong>Verify load capacity and circuit availability</strong> - Ensure adequate power source</li>
+                  <li><strong>Ensure power source is roughed in</strong> - De-energize circuit before work</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Pre-planning prevents conflicts with ceiling systems, fire sprinklers, and ensures proper load calculations for safe operation.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Planning Issues</h4>
+                <ul>
+                  <li>Installing drops without reviewing plans</li>
+                  <li>Wrong cord type for application</li>
+                  <li>Not verifying ceiling structure capacity</li>
+                  <li>Improper height causing safety issues</li>
+                  <li>Overloading circuit with too many drops</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> NEC 400.12 (Cord uses not permitted), NEC 400.7 (Cord types), Project specifications
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">2. J-Box and Cord Anchor Installation</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - CRITICAL - Independent Support</h4>
+                <ul>
+                  <li><strong>J-box MUST be independently supported</strong> - NEVER rest on ceiling grid</li>
+                  <li><strong>Use T-bar hanger clip, hanger wire, or unistrut</strong> - Secure to structure above</li>
+                  <li><strong>Remove ceiling tile at drop location</strong> - Install support hardware properly</li>
+                  <li><strong>Support rated for box and equipment weight</strong> - Include weight of cord and device</li>
+                  <li><strong>Box secured solidly</strong> - No movement when pulled</li>
+                  <li><strong>Use flexible whip, MC cable, or conduit from power source</strong> - Proper connections</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> CRITICAL SAFETY ISSUE - Boxes supported by ceiling grid can fall, causing injury and equipment damage. This is a code violation and inspection failure.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - DANGEROUS - Grid Support</h4>
+                <ul>
+                  <li>J-box resting on ceiling grid (MAJOR VIOLATION)</li>
+                  <li>Inadequate support for weight</li>
+                  <li>Hanger wire too light gauge</li>
+                  <li>Box loose or moving</li>
+                  <li>No independent structural support</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> NEC 314.23 (Box support requirements), NEC 300.11 (Equipment not supported by ceiling grid)
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">3. Cable Routing Above Ceiling</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Proper Cable Support</h4>
+                <ul>
+                  <li><strong>Route power cable from panel/j-box to drop location</strong> - Proper raceway or cable</li>
+                  <li><strong>Secure cable above ceiling per code</strong> - Every 4.5' for MC cable, within 12" of boxes</li>
+                  <li><strong>Keep clear of sprinkler system</strong> - Maintain required clearances</li>
+                  <li><strong>Avoid routing over walking paths</strong> - Unless properly protected</li>
+                  <li><strong>Use strain relief connector at j-box</strong> - Prevent pull stress on connections</li>
+                  <li><strong>Cable properly protected</strong> - No damage from sharp edges</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Proper routing prevents damage to cables, maintains fire safety clearances, and ensures reliable power delivery.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Cable Problems</h4>
+                <ul>
+                  <li>Cable not supported properly</li>
+                  <li>Running across sprinkler heads</li>
+                  <li>Cable routed through plenum without proper rating</li>
+                  <li>No strain relief at terminations</li>
+                  <li>Cables damaged by sharp edges</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> NEC 330.30 (MC cable support), NEC 300.22 (Wiring in plenums), NFPA 13 (Sprinkler clearances)
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">4. Drop Cord and Receptacle Installation</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Cord Installation</h4>
+                <ul>
+                  <li><strong>Standard drop height: 6-7 ft AFF</strong> - Accessible but not head-height hazard</li>
+                  <li><strong>Use SO cord or approved flexible cord</strong> - Rated for application</li>
+                  <li><strong>Install strain relief outlet box or inline plug</strong> - Proper cord grip fittings</li>
+                  <li><strong>Add surface box with receptacle</strong> - Secure mounting, weatherproof if needed</li>
+                  <li><strong>Ensure drop is properly positioned</strong> - Not over walking path unless protected</li>
+                  <li><strong>Cord properly secured</strong> - No tension on electrical connections</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Proper drop height and positioning prevents head injuries, allows easy access, and keeps cords out of high-traffic areas.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Installation Problems</h4>
+                <ul>
+                  <li>Drop too high (inaccessible) or too low (head hazard)</li>
+                  <li>Wrong cord type for application</li>
+                  <li>No strain relief (tension on connections)</li>
+                  <li>Cord hanging over walkway</li>
+                  <li>Poor positioning causing safety issues</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> NEC 400.7 (Cord types and uses), NEC 400.10 (Cord support), OSHA walking-working surfaces
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">5. Cord Drop Labeling and Safety</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Required Identification</h4>
+                <ul>
+                  <li><strong>Label drop with circuit ID</strong> - Match panel schedule (e.g., "Panel A-12")</li>
+                  <li><strong>Mark voltage rating</strong> - "120V" or "208V" clearly visible</li>
+                  <li><strong>Use color-coded cords if required</strong> - Orange for 208V, yellow for 120V (if specified)</li>
+                  <li><strong>Label at both j-box and outlet</strong> - Complete identification</li>
+                  <li><strong>Add "Do Not Remove" tag if temporary</strong> - Prevent accidental disconnection</li>
+                  <li><strong>Label breaker panel accordingly</strong> - Match drop location</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Proper labeling is code-required and critical for safety. Emergency responders and maintenance staff need clear circuit identification.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Missing Labels</h4>
+                <ul>
+                  <li>No circuit identification</li>
+                  <li>Missing voltage markings</li>
+                  <li>Generic labels that don't match panel</li>
+                  <li>Labels that fade or fall off</li>
+                  <li>Panel not updated with drop location</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> NEC 110.22 (Circuit identification), NEC 408.4 (Panel directory), OSHA 1910.145 (Safety labeling)
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">6. Cord Drop Testing and Verification</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Final Checks</h4>
+                <ul>
+                  <li><strong>Verify secure and grounded connections</strong> - Tug test all terminations</li>
+                  <li><strong>Check tightness of all strain reliefs</strong> - No tension on wiring</li>
+                  <li><strong>Ensure no tension on cords or conduit</strong> - Everything properly supported</li>
+                  <li><strong>Confirm appropriate cord length</strong> - Not too long (hazard) or too short (tension)</li>
+                  <li><strong>Verify safe positioning</strong> - Clear of traffic, properly secured</li>
+                  <li><strong>Power on circuit and test outlet/device</strong> - Verify proper operation</li>
+                  <li><strong>Restore ceiling tile and clean work area</strong> - Leave site clean</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Final testing ensures safe operation before leaving site. Proper verification prevents callbacks and safety issues.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Incomplete Testing</h4>
+                <ul>
+                  <li>Not testing before leaving site</li>
+                  <li>Tension on connections</li>
+                  <li>Poor grounding connections</li>
+                  <li>Cord length issues</li>
+                  <li>Ceiling tiles not restored</li>
+                  <li>No documentation of installation</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> NEC 110.12 (Workmanship), Installation checklist, Project closeout requirements
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">7. Rooftop Disconnect Pre-Installation Planning</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Pre-Installation Requirements</h4>
+                <ul>
+                  <li><strong>Verify disconnect specifications</strong> - Voltage, current rating, and environmental rating match application</li>
+                  <li><strong>Confirm load requirements</strong> - Disconnect properly sized for equipment being served</li>
+                  <li><strong>Select accessible location</strong> - Easy access for operation and emergency shutoff</li>
+                  <li><strong>Verify NEC 110.26 working space clearances</strong> - Typically 3' clearance in front of disconnect</li>
+                  <li><strong>Confirm disconnect location per NEC 705.20</strong> - Within sight of equipment or lockable</li>
+                  <li><strong>Plan conduit routing from panel to rooftop</strong> - Minimize bends, verify penetration locations</li>
+                  <li><strong>Verify weatherproof rating for outdoor use</strong> - NEMA 3R minimum for exterior locations</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Proper planning ensures disconnect is correctly sized, accessible for emergency use, and meets all code clearance requirements.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Planning Failures</h4>
+                <ul>
+                  <li>Disconnect undersized for load (will trip)</li>
+                  <li>Inaccessible location (emergency hazard)</li>
+                  <li>Insufficient working clearances</li>
+                  <li>Not within sight of equipment and not lockable</li>
+                  <li>Wrong enclosure type (not weatherproof)</li>
+                  <li>Poor conduit routing (excessive bends)</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> NEC 110.26 (Working space), NEC 705.20 (Disconnect location), NEC 430.102 (Equipment disconnect)
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">8. Rooftop Disconnect Safety & LOTO</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Safety Procedures</h4>
+                <ul>
+                  <li><strong>Follow LOTO procedures before work</strong> - De-energize circuit at source, verify with voltage tester</li>
+                  <li><strong>Wear appropriate PPE</strong> - Gloves, safety glasses, insulated footwear, hard hat</li>
+                  <li><strong>Use proper roof access equipment</strong> - Stable ladders, guardrails, or scaffolding</li>
+                  <li><strong>Fall protection required if over 6'</strong> - Harness, lifeline, anchor points per OSHA</li>
+                  <li><strong>Verify voltage with tester before touching</strong> - Test for zero energy state</li>
+                  <li><strong>First aid kit and fire extinguisher accessible</strong> - Emergency equipment on site</li>
+                  <li><strong>Never work alone on rooftop electrical</strong> - Always have qualified person present</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Rooftop work combines electrical hazards with fall hazards. Proper LOTO and fall protection are critical for worker safety.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Dangerous Practices</h4>
+                <ul>
+                  <li>Working on energized circuits</li>
+                  <li>No voltage verification before work</li>
+                  <li>Inadequate PPE</li>
+                  <li>No fall protection over 6'</li>
+                  <li>Working alone on roof</li>
+                  <li>Unstable ladder or access equipment</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> OSHA 1910.147 (LOTO), OSHA 1926.501 (Fall protection), NFPA 70E (Electrical safety)
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">9. Rooftop Disconnect Mounting & Weatherproofing</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Proper Mounting</h4>
+                <ul>
+                  <li><strong>Position disconnect at predetermined location</strong> - Per plans and working space requirements</li>
+                  <li><strong>Use level to ensure correct orientation</strong> - Plumb and level installation</li>
+                  <li><strong>Secure to roof structure using appropriate hardware</strong> - Penetrate roof membrane properly, seal all penetrations</li>
+                  <li><strong>Use weatherproof mounting brackets/pads</strong> - Elevated above roof surface to prevent water pooling</li>
+                  <li><strong>Verify NEMA 3R or 4 rating for outdoor use</strong> - Weatherproof enclosure appropriate for location</li>
+                  <li><strong>All conduit entries sealed with weatherproof hubs</strong> - Prevent water intrusion</li>
+                  <li><strong>Install drain hole plugs if not pre-installed</strong> - Allow condensation drainage</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Proper weatherproofing prevents water intrusion which causes corrosion, shorts, and equipment failure. Roof penetrations must be sealed to prevent leaks.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Mounting Problems</h4>
+                <ul>
+                  <li>Disconnect not level or plumb</li>
+                  <li>Roof penetrations not sealed (will leak)</li>
+                  <li>Non-weatherproof enclosure used outdoors</li>
+                  <li>Conduit entries not sealed</li>
+                  <li>Disconnect sitting in pooled water</li>
+                  <li>Poor mounting (disconnect loose or unstable)</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> NEC 110.3(B) (Installation per instructions), NEC 312.2 (Enclosure types), Manufacturer installation instructions
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">10. Rooftop Disconnect Conduit & Wiring</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Wiring Installation</h4>
+                <ul>
+                  <li><strong>Install conduit from panel to disconnect</strong> - EMT, PVC, or rigid per code and location</li>
+                  <li><strong>Use proper weatherproof fittings</strong> - Myers hubs or approved exterior connectors</li>
+                  <li><strong>Secure conduit per code requirements</strong> - Proper support spacing, protected from damage</li>
+                  <li><strong>Route wires through conduit to disconnect</strong> - Properly sized conductors for load</li>
+                  <li><strong>Terminate wires to proper terminals</strong> - L1, L2, L3 (if 3-phase), neutral if applicable, ground</li>
+                  <li><strong>Torque all connections per manufacturer spec</strong> - Use calibrated torque wrench, document values</li>
+                  <li><strong>Leave adequate wire length in box</strong> - Service loop for future work</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Proper wiring and terminations ensure safe, reliable operation. Torqued connections prevent loose connections and arcing.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Wiring Issues</h4>
+                <ul>
+                  <li>Non-weatherproof fittings in exterior location</li>
+                  <li>Undersized conductors for load</li>
+                  <li>Connections not torqued to spec</li>
+                  <li>No service loop (wires too tight)</li>
+                  <li>Poor conduit support or routing</li>
+                  <li>Wrong wire connections (miswired phases)</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> NEC 300.5 (Underground installations), NEC 110.14(D) (Torque requirements), NEC 430.32 (Conductor sizing)
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">11. Rooftop Disconnect Grounding & Bonding</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Grounding Requirements</h4>
+                <ul>
+                  <li><strong>Connect grounding conductor from panel to disconnect</strong> - Properly sized per NEC 250.122</li>
+                  <li><strong>Bond disconnect enclosure to ground</strong> - Green ground screw or bonding lug</li>
+                  <li><strong>Verify equipment grounding path is continuous</strong> - From source to disconnect to equipment</li>
+                  <li><strong>Bond all metallic conduits and raceways</strong> - Proper locknuts and bonding bushings</li>
+                  <li><strong>Equipment ground connected to equipment frame</strong> - Complete grounding path</li>
+                  <li><strong>Verify ground connection is tight</strong> - Torque per specification</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Proper grounding provides fault current path and protects against shock hazard. Critical for outdoor equipment exposed to lightning.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Grounding Failures</h4>
+                <ul>
+                  <li>Missing or undersized ground conductor</li>
+                  <li>Disconnect enclosure not grounded</li>
+                  <li>Discontinuous grounding path</li>
+                  <li>Loose ground connections</li>
+                  <li>Conduit not properly bonded</li>
+                  <li>Equipment not grounded to disconnect</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> NEC 250.4 (General grounding requirements), NEC 250.122 (Equipment grounding conductor sizing), NEC 250.134 (Grounding equipment)
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">12. Rooftop Disconnect Testing & Verification</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Testing Procedure</h4>
+                <ul>
+                  <li><strong>Double-check all wiring connections</strong> - Verify tightness and correct terminations</li>
+                  <li><strong>Confirm proper grounding and bonding</strong> - Continuity test on ground path</li>
+                  <li><strong>Re-energize circuit at panel</strong> - Remove LOTO, restore power</li>
+                  <li><strong>Test disconnect operation</strong> - Toggle to "off" position, verify no current flow</li>
+                  <li><strong>Toggle back to "on" position</strong> - Verify equipment operates normally</li>
+                  <li><strong>Check weatherproofing seals</strong> - All penetrations sealed, no water entry points</li>
+                  <li><strong>Verify working clearances maintained</strong> - Nothing blocking access to disconnect</li>
+                  <li><strong>Document test results</strong> - Record torque values, test procedures, results</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Testing before final inspection verifies proper installation and operation. Catch problems while they're easy to fix.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Testing Failures</h4>
+                <ul>
+                  <li>Not testing before leaving site</li>
+                  <li>Skipping disconnect operation test</li>
+                  <li>No verification of weatherproofing</li>
+                  <li>Missing documentation</li>
+                  <li>Leaving known issues for "later"</li>
+                  <li>Not verifying ground continuity</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> NEC 110.12 (Workmanship), Manufacturer test procedures, Company QC standards
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">13. Rooftop Disconnect Labeling & Documentation</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Required Labeling</h4>
+                <ul>
+                  <li><strong>Label disconnect with equipment it serves</strong> - Clear identification (e.g., "RTU-1 DISCONNECT")</li>
+                  <li><strong>Mark voltage and phase</strong> - "480V 3-PHASE" or similar clearly visible</li>
+                  <li><strong>Label supply source</strong> - Panel ID and circuit number (e.g., "FED FROM MDP-CKT 42")</li>
+                  <li><strong>Arc flash label if required</strong> - Per NEC 110.16 and NFPA 70E</li>
+                  <li><strong>Label wiring inside disconnect</strong> - Phase identification on conductors</li>
+                  <li><strong>Update panel schedule at source</strong> - Match disconnect location to breaker</li>
+                  <li><strong>Complete installation checklist</strong> - Document all steps completed, test results, inspection records</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Proper labeling is code-required and critical for safety. Emergency responders and maintenance staff need clear identification.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Missing Labels</h4>
+                <ul>
+                  <li>No equipment identification</li>
+                  <li>Missing voltage/phase markings</li>
+                  <li>No source identification</li>
+                  <li>Missing arc flash label when required</li>
+                  <li>Panel schedule not updated</li>
+                  <li>No installation documentation</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> NEC 110.22 (Circuit identification), NEC 110.16 (Arc flash warning), NEC 408.4 (Panel directory)
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">14. Disconnect Mounting Methods & Support</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Proper Disconnect Mounting</h4>
+                <ul>
+                  <li><strong>Use strut rack or independent support structure</strong> - Unistrut frame, angle iron, or dedicated stand</li>
+                  <li><strong>NEVER mount disconnects directly to RTUs or equipment</strong> - Equipment vibrates, creates loose connections</li>
+                  <li><strong>Mount rack to building structure</strong> - Roof deck, curb, or structural members - NOT equipment</li>
+                  <li><strong>Provide adequate spacing between disconnects</strong> - Minimum 3" between enclosures, maintain working clearances</li>
+                  <li><strong>Support rack adequately for disconnect weight</strong> - Calculate total load, use appropriate strut and hardware</li>
+                  <li><strong>Level and plumb installation</strong> - Use level during installation, straight appearance</li>
+                  <li><strong>Weatherproof all roof penetrations</strong> - Seal mounting hardware, prevent roof leaks</li>
+                  <li><strong>Bond strut rack to grounding system</strong> - Ground all metallic support structures</li>
+                  <li><strong>Allow for thermal expansion</strong> - Rooftop equipment expands/contracts with temperature</li>
+                  <li><strong>Consider access and maintenance</strong> - Disconnects accessible without climbing on equipment</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Independent mounting prevents vibration-related connection failures, allows equipment service without affecting electrical, and meets code requirements. Equipment-mounted disconnects fail inspections.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Improper Mounting</h4>
+                <ul>
+                  <li>Mounting disconnects to RTUs or equipment (WRONG)</li>
+                  <li>Using equipment as support structure</li>
+                  <li>Inadequate spacing between disconnects</li>
+                  <li>Weak or undersized support structure</li>
+                  <li>Disconnects not level or plumb</li>
+                  <li>Roof penetrations not sealed (leaks)</li>
+                  <li>Rack not grounded properly</li>
+                  <li>No consideration for thermal expansion</li>
+                  <li>Disconnects inaccessible for maintenance</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> NEC 110.26 (Working space), NEC 110.13 (Mounting), Manufacturer installation instructions, Building structural requirements
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- TRANSFORMER INSTALLATIONS -->
+      <div class="category">
+        <div class="category-header" onclick="toggleCategory('transformers')">
+          <span class="category-title">Transformer Installations</span>
+          <span class="toggle-icon">▼</span>
+        </div>
+        <div id="transformers" class="category-content">
+          
+          <div class="standard">
+            <div class="standard-title">1. Transformer Location & Installation</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Clearances & Ventilation</h4>
+                <ul>
+                  <li><strong>Minimum 3' clearance on front for access</strong> - 6' for high voltage (>600V)</li>
+                  <li><strong>Adequate ventilation space</strong> - Check manufacturer specs for heat dissipation</li>
+                  <li><strong>Mounting height appropriate</strong> - Consider weight and accessibility</li>
+                  <li><strong>Protection from physical damage</strong> - Bollards or barriers if in traffic area</li>
+                  <li><strong>Accessible for maintenance</strong> - Don't box in or block access</li>
+                  <li><strong>Level and plumb mounting</strong> - Use level during installation</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Proper clearances are code-required for safe operation and maintenance. Inadequate ventilation causes overheating and premature failure.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Clearance Violations</h4>
+                <ul>
+                  <li>Insufficient working clearance</li>
+                  <li>Poor ventilation (enclosed space)</li>
+                  <li>Mounted where vulnerable to damage</li>
+                  <li>Access blocked by other equipment</li>
+                  <li>Not level or plumb</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> NEC 450.9 (Ventilation), NEC 110.26 (Working space), NEC 450.13 (Accessibility)
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">2. Transformer Overcurrent Protection</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - OCPD Requirements</h4>
+                <ul>
+                  <li><strong>Primary OCPD sized per NEC 450.3</strong> - Typically 125% of primary FLA (for 600V and below)</li>
+                  <li><strong>Example: 45 kVA, 480V → Primary = 54A → Use 60A breaker max</strong></li>
+                  <li><strong>Secondary OCPD required if primary over 125%</strong> - Typically at secondary panel</li>
+                  <li><strong>Use proper breaker interrupting rating</strong> - Match available fault current</li>
+                  <li><strong>Label primary and secondary OCPD clearly</strong> - Circuit identification</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Proper OCPD sizing protects transformer from overload and fault conditions. Undersized protection = nuisance trips; oversized = fire hazard.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - OCPD Problems</h4>
+                <ul>
+                  <li>OCPD oversized (no protection)</li>
+                  <li>OCPD undersized (nuisance trips)</li>
+                  <li>Missing secondary protection when required</li>
+                  <li>Wrong interrupting rating</li>
+                  <li>No labeling of protection devices</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> NEC 450.3 (Transformer overcurrent protection), NEC 240.4 (Protection of conductors)
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">3. Transformer Grounding & Bonding</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Separately Derived System</h4>
+                <ul>
+                  <li><strong>System bonding jumper at transformer</strong> - Bond XO terminal to case and ground</li>
+                  <li><strong>Grounding electrode conductor to electrode</strong> - Sized per NEC 250.66</li>
+                  <li><strong>Equipment grounding conductor to source</strong> - Maintain ground path</li>
+                  <li><strong>Bond transformer case to ground</strong> - All metal parts grounded</li>
+                  <li><strong>CRITICAL: Neutral bonded to ground at transformer only</strong> - Not at secondary panel</li>
+                  <li><strong>Use proper lug sizes and torque all connections</strong></li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> CRITICAL - Improper grounding is dangerous and code violation. Neutral must be bonded at source (transformer) but isolated at downstream panels.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Grounding Violations</h4>
+                <ul>
+                  <li>No system bonding jumper</li>
+                  <li>Neutral bonded at both transformer AND panel (VIOLATION)</li>
+                  <li>Undersized grounding electrode conductor</li>
+                  <li>Transformer case not grounded</li>
+                  <li>No connection to grounding electrode</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> NEC 250.30 (Separately derived systems), NEC 250.66 (Grounding electrode conductor sizing)
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">4. Transformer Conductor Sizing</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Primary & Secondary Conductors</h4>
+                <ul>
+                  <li><strong>Primary conductors: 125% of transformer FLA minimum</strong></li>
+                  <li><strong>Secondary conductors: Size per load and NEC 215</strong></li>
+                  <li><strong>Example: 45 kVA, 480V primary → 54A FLA → Size for 68A minimum</strong></li>
+                  <li><strong>Account for voltage drop</strong> - Especially on long runs</li>
+                  <li><strong>Torque all connections per spec</strong> - Typically 30-50 in-lbs on lug connections</li>
+                  <li><strong>Label primary and secondary conductors</strong> - Phase identification</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Proper conductor sizing prevents overheating and voltage drop. Undersized conductors are fire hazards; oversized wastes money but is safe.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Conductor Issues</h4>
+                <ul>
+                  <li>Conductors undersized for load</li>
+                  <li>No consideration for voltage drop</li>
+                  <li>Connections not torqued</li>
+                  <li>Wrong phase identification</li>
+                  <li>Poor termination quality</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> NEC 215.2 (Feeder sizing), NEC 450.3 (Transformer protection), NEC 110.14(C) (Termination temperatures)
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">5. Transformer Disconnecting Means</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Disconnect Requirements</h4>
+                <ul>
+                  <li><strong>Lockable disconnect on primary side</strong> - Within sight or lock-off provisions</li>
+                  <li><strong>Clearly mark "TRANSFORMER DISCONNECT"</strong> - Identification label</li>
+                  <li><strong>Accessible and not blocked</strong> - Easy to reach in emergency</li>
+                  <li><strong>Rated for voltage and current</strong> - Adequate interrupting capacity</li>
+                  <li><strong>Lock-off capability if not in sight</strong> - Padlock provision</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Disconnect allows safe maintenance and emergency shutoff. "Within sight" or lockable is code requirement.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Disconnect Problems</h4>
+                <ul>
+                  <li>No disconnect provided</li>
+                  <li>Disconnect not within sight and not lockable</li>
+                  <li>Poor labeling or no label</li>
+                  <li>Undersized for load</li>
+                  <li>Access blocked by equipment</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> NEC 450.14 (Disconnecting means), NEC 110.25 (Lockable disconnect)
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">6. Secondary Panelboard Requirements</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Secondary Panel Standards</h4>
+                <ul>
+                  <li><strong>Adequate working space per NEC 110.26</strong> - 3' minimum clearance</li>
+                  <li><strong>Panel properly labeled</strong> - Supply source identified (e.g., "Fed from Transformer T-1")</li>
+                  <li><strong>Voltage marking on panel</strong> - Clear indication of voltage</li>
+                  <li><strong>Circuit directory complete</strong> - All circuits labeled</li>
+                  <li><strong>Neutral isolated from ground</strong> - In secondary panel (ground/neutral bonded at transformer)</li>
+                  <li><strong>Proper OCPD sizing</strong> - Match transformer secondary</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Secondary panel must be properly identified and installed. Common mistake is bonding neutral to ground (should only be at transformer).
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Panel Problems</h4>
+                <ul>
+                  <li>Insufficient working clearance</li>
+                  <li>No source identification</li>
+                  <li>Neutral bonded to ground in panel (VIOLATION)</li>
+                  <li>Missing voltage labels</li>
+                  <li>Incomplete circuit directory</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> NEC 110.26 (Working space), NEC 408.4 (Circuit directory), NEC 250.30 (SDS grounding)
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- EXTERIOR LIGHTING - NEW SECTION -->
+      <div class="category">
+        <div class="category-header" onclick="toggleCategory('exterior')">
+          <span class="category-title">Exterior Lighting & Site Work</span>
+          <span class="toggle-icon">▼</span>
+        </div>
+        <div id="exterior" class="category-content">
+          
+          <div class="standard">
+            <div class="standard-title">1. Parking Lot Light Pre-Installation</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Pre-Installation Requirements</h4>
+                <ul>
+                  <li><strong>Verify all locations per site lighting plan</strong> - Confirm pole spacing, fixture types, mounting heights</li>
+                  <li><strong>Underground utility locates complete (811)</strong> - Private locates for on-site utilities, mark all conflicts</li>
+                  <li><strong>Trenching and conduit runs complete</strong> - All underground work ready, tested for integrity</li>
+                  <li><strong>Proper footing design verified</strong> - Anchor bolt template matches pole base, rebar cage ready</li>
+                  <li><strong>Concrete cure time planned</strong> - Typically 3-7 days before pole setting, coordinate schedule</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Proper planning prevents conflicts with utilities, ensures structural integrity, and avoids schedule delays from improper foundation work.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Common Mistakes</h4>
+                <ul>
+                  <li>Setting poles before concrete fully cures</li>
+                  <li>Failing to call 811 before excavation</li>
+                  <li>Wrong anchor bolt pattern for pole base</li>
+                  <li>Missing conduit stub-up inside foundation</li>
+                  <li>Inadequate footing depth for pole height/wind load</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> NEC 410.30 (Lighting support), Local building codes for footing requirements, Call 811 before you dig
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">2. Foundation & Base Installation</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Foundation Standards</h4>
+                <ul>
+                  <li><strong>Excavate per engineered specifications</strong> - Typically 24"-36" diameter x 6'+ deep, verify with structural drawings</li>
+                  <li><strong>Install rebar cage properly positioned</strong> - Maintain proper spacing from sides and bottom using chairs</li>
+                  <li><strong>Anchor bolts set with template</strong> - Use manufacturer's template, verify bolt pattern and orientation match pole</li>
+                  <li><strong>Conduit stub-up inside base</strong> - Adequate sweep radius, properly supported, terminates at proper height</li>
+                  <li><strong>Concrete: 3000-4000 PSI mix</strong> - Vibrate to eliminate voids, finish top smooth and level</li>
+                  <li><strong>Allow proper cure time</strong> - Minimum 3 days (7 days preferred) before setting pole</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Foundation integrity is critical for pole stability and safety. Improper installation can lead to pole failure, especially in high winds.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Foundation Problems</h4>
+                <ul>
+                  <li>Anchor bolts not plumb or misaligned</li>
+                  <li>Insufficient concrete vibration (voids present)</li>
+                  <li>Conduit not stubbed up properly</li>
+                  <li>Setting poles before concrete cures</li>
+                  <li>Shallow footings not meeting wind load requirements</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> Structural engineer specifications, Local building codes, Manufacturer installation instructions
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">3. Pole Strapping & Lifting - CRITICAL SAFETY</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Safe Pole Handling</h4>
+                <ul>
+                  <li><strong>Inspect pole before lifting</strong> - Check for damage, verify lifting points are intact</li>
+                  <li><strong>Use nylon lifting straps rated 2x pole weight</strong> - Never use chains or cables that can damage finish</li>
+                  <li><strong>Strap near center of gravity</strong> - Typically 1/3 from top, use padding to protect pole finish</li>
+                  <li><strong>Use tag line on bottom of pole</strong> - Maintain control during lift, prevent uncontrolled swing</li>
+                  <li><strong>Keep personnel clear of swing radius</strong> - Establish safety zone, use spotters</li>
+                  <li><strong>NEVER lift by fixture or handhole</strong> - These are not lifting points and will fail</li>
+                  <li><strong>Lower pole vertically</strong> - Align with anchor bolts, guide slowly into position</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Poles are heavy and awkward. Improper lifting causes injuries, equipment damage, and can drop poles causing serious harm or property damage.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Dangerous Practices</h4>
+                <ul>
+                  <li>Lifting with chains (damages pole finish)</li>
+                  <li>No tag line (uncontrolled swing)</li>
+                  <li>Personnel in swing radius during lift</li>
+                  <li>Lifting by fixture or handhole</li>
+                  <li>Straps positioned incorrectly (pole imbalance)</li>
+                  <li>Working near overhead power lines</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> OSHA crane and rigging safety standards, Manufacturer lifting instructions, Fall protection above 6'
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">4. Pole & Fixture Assembly</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Assembly Procedure</h4>
+                <ul>
+                  <li><strong>Mount fixture to pole on ground</strong> - Easier and safer than working at height (if single-piece pole)</li>
+                  <li><strong>Feed fixture wires into pole properly</strong> - Leave adequate service loop, no sharp bends</li>
+                  <li><strong>Attach ground wire to internal lug</strong> - Proper grounding connection inside pole base</li>
+                  <li><strong>Install photocell, surge protection as specified</strong> - Per specifications and wiring diagram</li>
+                  <li><strong>Seal all penetrations</strong> - Weatherproof gaskets on all fixture-to-pole connections</li>
+                  <li><strong>Test fixture before raising pole</strong> - Verify operation on ground, saves re-work</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Assembling on the ground is safer and more efficient. Proper sealing prevents water intrusion and early fixture failure.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Assembly Issues</h4>
+                <ul>
+                  <li>Inadequate service loop in fixture wiring</li>
+                  <li>Missing or damaged weatherproof gaskets</li>
+                  <li>Ground wire not connected</li>
+                  <li>Sharp bends in wiring inside pole</li>
+                  <li>Not testing fixture before pole raising</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> NEC 410.30 (Fixture support), Manufacturer installation instructions
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">5. Electrical Connections in Handhole</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Handhole Wiring</h4>
+                <ul>
+                  <li><strong>Pull wires from panel/junction box</strong> - USE-2 or THWN-2 in PVC conduit, proper size for voltage drop</li>
+                  <li><strong>Use waterproof connectors for all splices</strong> - DBR or approved direct-bury splicing method</li>
+                  <li><strong>Proper grounding connection</strong> - Ground wire to ground rod or system ground per NEC</li>
+                  <li><strong>Label circuits clearly</strong> - Match one-line diagram, identify voltage and circuit number</li>
+                  <li><strong>Leave adequate service loop</strong> - Enough wire to work comfortably, coil neatly in handhole</li>
+                  <li><strong>Verify wire size for voltage drop</strong> - Calculate and confirm adequate for run length</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Exterior connections face harsh weather. Waterproof splices and proper grounding are critical for long-term reliability and safety.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Connection Problems</h4>
+                <ul>
+                  <li>Non-waterproof wire nuts in exterior location</li>
+                  <li>Inadequate voltage drop calculation (dim lights)</li>
+                  <li>Poor grounding connection or missing ground</li>
+                  <li>Wires too tight (no service loop)</li>
+                  <li>Missing circuit labels in handhole</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> NEC 300.5 (Underground installations), NEC 410.30, NEC 250.52 (Grounding electrodes)
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">6. Final Inspection & Commissioning</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Final Checks</h4>
+                <ul>
+                  <li><strong>Verify all mounting hardware torqued</strong> - Base bolts, fixture mounting, handhole cover</li>
+                  <li><strong>Test fixture operation</strong> - Use photocell bypass if needed for daytime testing</li>
+                  <li><strong>Inspect all wire terminations</strong> - Tug test on connections, verify waterproof integrity</li>
+                  <li><strong>Confirm circuit labeling at panel and pole</strong> - Match breaker to pole location</li>
+                  <li><strong>Take footcandle readings if required</strong> - Document lighting levels per spec</li>
+                  <li><strong>Document installation</strong> - Photos, as-builts, notify inspector/GC for final</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Final inspection catches problems before acceptance. Documentation protects against warranty claims and provides service reference.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Missed Steps</h4>
+                <ul>
+                  <li>Skipping torque verification on base bolts</li>
+                  <li>Not testing fixtures before leaving site</li>
+                  <li>Missing circuit labels</li>
+                  <li>No documentation or photos taken</li>
+                  <li>Failing to notify inspector for final sign-off</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> Project specifications, Local inspection requirements, Manufacturer torque specifications
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- FINISH & TRIM WORK -->
+      <div class="category">
+        <div class="category-header" onclick="toggleCategory('finish')">
+          <span class="category-title">Finish & Trim Work</span>
+          <span class="toggle-icon">▼</span>
+        </div>
+        <div id="finish" class="category-content">
+          
+          <div class="standard">
+            <div class="standard-title">1. Device Installation</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Quality Device Installation</h4>
+                <ul>
+                  <li><strong>Devices installed level and plumb</strong> - Use small level to verify</li>
+                  <li><strong>Mounting screws tight but not over-tightened</strong> - Don't crack device</li>
+                  <li><strong>Ground screw connected properly</strong> - Green screw to ground wire</li>
+                  <li><strong>Wires properly terminated on screws</strong> - Clockwise wrap, full contact</li>
+                  <li><strong>Box fill not exceeded</strong> - Wires fold neatly into box</li>
+                  <li><strong>Coverplate gaps minimized</strong> - Shim boxes if needed to reduce gaps</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Level, properly installed devices look professional. Poor installation is visible to customers and reflects on company quality.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Poor Device Work</h4>
+                <ul>
+                  <li>Devices crooked or not level</li>
+                  <li>Loose mounting (device moves when plugging in)</li>
+                  <li>Ground not connected</li>
+                  <li>Wires wrapped counter-clockwise (can back out)</li>
+                  <li>Large gaps around coverplates</li>
+                  <li>Box overstuffed (device won't sit flush)</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> NEC 406.4 (Receptacle installation), NEC 404.9 (Switch installation), NEC 314.16 (Box fill)
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">3. 2x4 Lay-In Fixture Installation - Drop Ceilings</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Lay-In Fixture Pre-Installation</h4>
+                <ul>
+                  <li><strong>Verify ceiling grid layout is complete and secure</strong> - Grid must be level and properly supported</li>
+                  <li><strong>Confirm fixture type and voltage per plans</strong> - Match reflected ceiling plan (RCP)</li>
+                  <li><strong>Ensure branch wiring roughed in and accessible</strong> - MC cable or whip location verified</li>
+                  <li><strong>Confirm ceiling tile cutout layout matches RCP</strong> - Fixture locations per drawings</li>
+                  <li><strong>Power off at panel, LOTO if necessary</strong> - Verify zero energy state</li>
+                  <li><strong>Inspect fixtures for damage before installation</strong> - Check lens, housing, ballast/driver</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Pre-installation verification prevents installing wrong fixtures or placing them in wrong locations. Grid must be stable before fixture installation.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Planning Problems</h4>
+                <ul>
+                  <li>Installing before grid is secure (fixtures will shift)</li>
+                  <li>Wrong fixture type or voltage</li>
+                  <li>Fixture locations don't match RCP</li>
+                  <li>Wiring not accessible or missing</li>
+                  <li>Working on energized circuits</li>
+                  <li>Not inspecting fixtures (install damaged units)</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> NEC 410.36(B) (Fixture support), Project RCP and specifications, OSHA LOTO procedures
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">4. Fixture Independent Support - CRITICAL CODE REQUIREMENT</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Proper Fixture Support</h4>
+                <ul>
+                  <li><strong>MINIMUM 2 support wires required per fixture</strong> - NEC 410.36(B) mandates independent support</li>
+                  <li><strong>Use #12 or #9 steel support wire</strong> - Adequate strength for fixture weight</li>
+                  <li><strong>Attach from fixture corners to structure above</strong> - Deck, joists, or approved ceiling structure</li>
+                  <li><strong>Secure with wire-wrap or approved T-bar clips</strong> - Positive connection, won't slip</li>
+                  <li><strong>Fixtures CANNOT rest solely on ceiling grid</strong> - Grid is not rated to support fixture weight</li>
+                  <li><strong>Support wires positioned to prevent fixture movement</strong> - Diagonal corners preferred</li>
+                  <li><strong>Verify support wires are taut, not loose</strong> - Should support full fixture weight</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> CRITICAL CODE REQUIREMENT - Ceiling grid is not structural support. Fixtures without independent support can fall during earthquakes, vibrations, or grid failure.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - MAJOR VIOLATIONS - Support Failures</h4>
+                <ul>
+                  <li>Fixture resting only on grid (CODE VIOLATION)</li>
+                  <li>Only 1 support wire (inadequate)</li>
+                  <li>Support wires loose or improperly secured</li>
+                  <li>Wrong wire gauge (too light)</li>
+                  <li>Wires attached to ceiling grid instead of structure</li>
+                  <li>No support wires at all (AUTOMATIC FAIL)</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> NEC 410.36(B) (Fixtures must be independently supported), Local seismic codes, Manufacturer installation instructions
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">5. Fixture Wiring & Connections</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Wiring Procedure</h4>
+                <ul>
+                  <li><strong>Pull MC cable or whip from junction box/circuit</strong> - Adequate length to reach fixture</li>
+                  <li><strong>Route through approved knockout with strain relief</strong> - Proper MC connector</li>
+                  <li><strong>Connect wiring: Black (line), White (neutral), Green/bare (ground)</strong> - Standard color coding</li>
+                  <li><strong>Use wire nuts or push connectors per spec</strong> - Secure connections, tug test</li>
+                  <li><strong>Bond fixture to metal framing/structure</strong> - Grounding screw or pigtail</li>
+                  <li><strong>Verify all connections tight in junction box</strong> - No loose wires</li>
+                  <li><strong>Reinstall junction box cover</strong> - Secure before closing fixture</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Proper wiring ensures safe operation. Poor connections cause flickering, overheating, or complete fixture failure.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Wiring Problems</h4>
+                <ul>
+                  <li>No strain relief at cable entry</li>
+                  <li>Wrong wire connections (reversed polarity)</li>
+                  <li>Loose connections (will cause issues)</li>
+                  <li>Fixture not grounded properly</li>
+                  <li>Junction box cover missing or loose</li>
+                  <li>Damaged wire insulation from rough handling</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> NEC 410.24 (Fixture wiring), NEC 110.14 (Electrical connections), NEC 250.4 (Grounding)
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">6. Fixture Placement & Final Assembly</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Final Installation</h4>
+                <ul>
+                  <li><strong>Lay fixture carefully into 2x4 ceiling grid opening</strong> - Avoid damaging grid or fixture</li>
+                  <li><strong>Ensure fixture sits level in grid</strong> - All four corners evenly supported by T-bars</li>
+                  <li><strong>Reinstall lens/diffuser properly</strong> - Clean lens before installing, seated correctly</li>
+                  <li><strong>Test fit surrounding ceiling tiles</strong> - Verify tiles fit properly around fixture</li>
+                  <li><strong>Check fixture alignment</strong> - Straight with grid pattern, professional appearance</li>
+                  <li><strong>Clean fixture exterior</strong> - Remove fingerprints, dust, construction debris</li>
+                  <li><strong>Verify junction box covers secured</strong> - No covers left off</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Final appearance matters. Level, clean fixtures with proper lens installation look professional and reflect quality work.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Assembly Issues</h4>
+                <ul>
+                  <li>Fixture sitting crooked in grid</li>
+                  <li>Lens not fully seated or missing clips</li>
+                  <li>Dirty or smudged lenses</li>
+                  <li>Gaps between fixture and ceiling tiles</li>
+                  <li>Junction box covers left off</li>
+                  <li>Rough handling causing dents or scratches</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> NEC 110.12 (Workmanship), Manufacturer installation instructions, Project specifications
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">7. Fixture Testing & Verification</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Testing Procedure</h4>
+                <ul>
+                  <li><strong>Restore power at panel</strong> - Remove LOTO, energize circuit</li>
+                  <li><strong>Test each fixture for proper operation</strong> - Switch on/off, verify illumination</li>
+                  <li><strong>Verify circuit label matches panel schedule</strong> - Confirm proper circuit identification</li>
+                  <li><strong>Check for flickering or buzzing</strong> - Indicates wiring or ballast/driver issues</li>
+                  <li><strong>Confirm fixture count matches drawings</strong> - Verify all fixtures installed per RCP</li>
+                  <li><strong>Verify all fixtures level and damage-free</strong> - Walk-through inspection</li>
+                  <li><strong>Document installation</strong> - Note any issues, notify GC/inspector if needed</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> Testing before final inspection catches wiring errors and defective fixtures while they're easy to fix. Complete verification prevents callbacks.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Testing Failures</h4>
+                <ul>
+                  <li>Not testing fixtures before leaving site</li>
+                  <li>Ignoring flickering or buzzing (sign of problems)</li>
+                  <li>Missing fixtures not caught until final inspection</li>
+                  <li>Circuit labels don't match panel</li>
+                  <li>No documentation of installation</li>
+                  <li>Leaving known defects for "later"</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> NEC 110.12 (Workmanship), Project specifications, Company QC standards
+            </div>
+          </div>
+
+          <div class="standard">
+            <div class="standard-title">8. Final Cleanup & Quality Walk</div>
+            <div class="standard-content">
+              <div class="column correct">
+                <h4>✓ CORRECT - Professional Completion</h4>
+                <ul>
+                  <li><strong>All coverplates installed</strong> - Correct color and style</li>
+                  <li><strong>No drywall mud or paint on devices</strong> - Clean with damp cloth</li>
+                  <li><strong>All wire nuts tight and secure</strong> - Tug test connections</li>
+                  <li><strong>Boxes filled with insulation behind in exterior walls</strong> - Energy code</li>
+                  <li><strong>All debris removed from site</strong> - Leave cleaner than you found it</li>
+                  <li><strong>Self-inspection before calling complete</strong> - Walk through with foreman checklist</li>
+                </ul>
+                <div class="note">
+                  <strong>Why:</strong> First impression is last impression. Clean, complete work shows pride and professionalism. Prevents callbacks for small items.
+                </div>
+              </div>
+              <div class="column incorrect">
+                <h4>✗ INCORRECT - Incomplete Work</h4>
+                <ul>
+                  <li>Missing coverplates</li>
+                  <li>Devices covered in construction debris</li>
+                  <li>Loose connections in boxes</li>
+                  <li>No insulation in exterior wall boxes</li>
+                  <li>Wire scraps and trash left behind</li>
+                  <li>No final inspection before leaving</li>
+                </ul>
+              </div>
+            </div>
+            <div class="code-ref">
+              <strong>References:</strong> NEC 110.12 (Workmanship), Energy code requirements, Contract specifications
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer">
+      <p><strong>Mastercraft Electric</strong> | Western Washington | Installation Standards Library</p>
+      <p>Updated: December 2024 | For internal use by construction teams</p>
+    </div>
+  </div>
+
+  <script>
+    function toggleCategory(id) {
+      const content = document.getElementById(id);
+      const header = content.previousElementSibling;
+      const icon = header.querySelector('.toggle-icon');
+      
+      content.classList.toggle('active');
+      
+      if (content.classList.contains('active')) {
+        icon.style.transform = 'rotate(180deg)';
+      } else {
+        icon.style.transform = 'rotate(0deg)';
+      }
+    }
+    
+    // Open first category by default
+    document.addEventListener('DOMContentLoaded', function() {
+      toggleCategory('startup');
+    });
+  </script>
+</body>
+</html>
