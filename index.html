@@ -28,20 +28,57 @@
     }
     
     .header {
-      background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+      background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
       color: white;
-      padding: 30px;
+      padding: 20px 30px;
       border-radius: 8px 8px 0 0;
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      border-bottom: 4px solid #FFD700;
+    }
+    
+    .header-logo {
+      height: 80px;
+      width: auto;
+      flex-shrink: 0;
+    }
+    
+    .header-content {
+      flex: 1;
     }
     
     .header h1 {
       font-size: 28px;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
+      color: #FFD700;
     }
     
     .header p {
       font-size: 16px;
       opacity: 0.9;
+      color: white;
+    }
+    
+    @media (max-width: 768px) {
+      .header {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+        gap: 15px;
+      }
+      
+      .header-logo {
+        height: 60px;
+      }
+      
+      .header h1 {
+        font-size: 22px;
+      }
+      
+      .header p {
+        font-size: 14px;
+      }
     }
     
     .content {
@@ -49,15 +86,15 @@
     }
     
     .intro {
-      background: #eff6ff;
-      border-left: 4px solid #3b82f6;
+      background: #fffbeb;
+      border-left: 4px solid #FFD700;
       padding: 20px;
       margin-bottom: 30px;
       border-radius: 4px;
     }
     
     .intro h2 {
-      color: #1e3a8a;
+      color: #1a1a1a;
       margin-bottom: 10px;
     }
     
@@ -117,8 +154,10 @@
     .standard-title {
       font-size: 18px;
       font-weight: 600;
-      color: #1e3a8a;
+      color: #1a1a1a;
       margin-bottom: 16px;
+      padding-left: 12px;
+      border-left: 3px solid #FFD700;
     }
     
     .standard-content {
@@ -203,8 +242,11 @@
 <body>
   <div class="container">
     <div class="header">
-      <h1>⚡ Mastercraft Electric Installation Standards</h1>
-      <p>Visual reference guide for construction teams | Western Washington</p>
+      <img src="logo.jpg" alt="Mastercraft Electric Logo" class="header-logo">
+      <div class="header-content">
+        <h1>⚡ Installation Standards Library</h1>
+        <p>Visual reference guide for construction teams | Western Washington</p>
+      </div>
     </div>
     
     <div class="content">
